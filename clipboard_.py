@@ -1,9 +1,9 @@
 from enum import Enum, auto
 
 
-class DeviceType(Enum, str):
-	ios = auto()
-	other = auto()
+class DeviceType(str, Enum):
+	ios = 'ios'
+	other = 'other'
 
 
 def prepare_device() -> DeviceType:
