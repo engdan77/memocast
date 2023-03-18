@@ -19,6 +19,7 @@ class PodcastParser(ABC):
     def parse(self) -> Iterable[Url]:
         """Parse and return iterable Urls"""
         logger.info('Start parsing')
+        bs = BeautifulSoup(self.html, 'html.parser')
         ...
         return [Url('foo', 'bar')]
 
