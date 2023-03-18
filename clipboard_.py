@@ -1,7 +1,7 @@
 from enum import Enum, auto
 
 
-class DeviceType(str, Enum):
+class DeviceType(Enum, str):
 	ios = auto()
 	other = auto()
 
