@@ -1,5 +1,5 @@
 import __info__ as info
-from io import prepare_device
+from io_ import prepare_device
 from logging_ import get_logger
 
 logger = get_logger()
