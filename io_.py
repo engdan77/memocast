@@ -1,13 +1,10 @@
 from enum import Enum
 import requests
 
-
-class DeviceType(str, Enum):
-	ios = 'ios'
-	other = 'other'
+from enums import DeviceType
 
 
-def prepare_device() -> DeviceType:
+def get_device_and_import_modules() -> DeviceType:
 	"""import required packages and return type"""
 	try:
 		import clipboard as iosclipboard
@@ -21,5 +18,6 @@ def prepare_device() -> DeviceType:
 def download_html(url: str) -> str:
 	"""Download URL"""
 	r = requests.get(url)
+	return r.content.decode()
 
 

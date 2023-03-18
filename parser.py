@@ -1,9 +1,10 @@
-from typing import Protocol, Iterable
+from typing import Iterable
 from dataclasses import dataclass
 from abc import ABC
 from bs4 import BeautifulSoup
 
 
+@dataclass
 class Url:
     url: str
     description: str
