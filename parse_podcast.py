@@ -11,3 +11,5 @@ def main():
     logger.info(f'Using {device}')
 
 
+if __name__ == '__main__':
+    main()
