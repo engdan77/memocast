@@ -20,7 +20,7 @@ class PodcastParser(ABC):
         """Parse and return iterable Urls"""
         logger.info('Start parsing')
         ...
-        return (Url('foo', 'bar'))
+        return [Url('foo', 'bar')]
 
 
 class TalkPythonToMeParser(PodcastParser):
