@@ -1,8 +1,6 @@
 import __info__ as info
 from io_ import prepare_device
-from logging_ import get_logger
-
-logger = get_logger()
+from logging_ import logger
 
 
 def main():

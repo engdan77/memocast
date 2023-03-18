@@ -1,4 +1,5 @@
 from enum import Enum
+import requests
 
 
 class DeviceType(str, Enum):
@@ -15,3 +16,10 @@ def prepare_device() -> DeviceType:
 	else:
 		device = DeviceType.ios
 	return device
+
+
+def download_html(url: str) -> str:
+	"""Download URL"""
+	r = requests.get(url)
+
+

@@ -2,7 +2,16 @@ import logging
 from __info__ import __pkg__
 
 
-def get_logger():
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s: %(message)s')
-    logger = logging.getLogger(__pkg__)
-    return logger
+class Logger(object):
+    _logger = None
+
+    def __new__(cls):
+        """Create a singletone"""
+        if not cls._logger:
+            cls._logger = super().__new__(cls)
+            logging.basicConfig(level=logging.DEBUG, format='%(asctime)s: %(message)s')
+            cls._logger = logging.getLogger(__pkg__)
+        return cls._logger
+
+
+logger = Logger()
