@@ -2,6 +2,7 @@ from typing import Iterable
 from dataclasses import dataclass
 from abc import ABC
 from bs4 import BeautifulSoup
+from logging_ import logger
 
 
 @dataclass
@@ -17,7 +18,9 @@ class PodcastParser(ABC):
 
     def parse(self) -> Iterable[Url]:
         """Parse and return iterable Urls"""
+        logger.info('Start parsing')
         ...
+        return (Url('foo', 'bar'))
 
 
 class TalkPythonToMeParser(PodcastParser):
