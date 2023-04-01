@@ -1,6 +1,7 @@
 from io_ import get_device_and_import_modules
 from enums import DeviceType
 from abc import abstractmethod
+from unittest import mock
 if get_device_and_import_modules() == DeviceType.ios:
     import ui
 
@@ -10,10 +11,13 @@ def view_factory():
     device = get_device_and_import_modules()
     if device.ios:
         return PythonistaView
+    if device.other:
+        return mock.Mock()
 
 
 class BaseView:
 
+    @abstractmethod
     def show(self):
         """Method expected for showing the UI"""
         ...
