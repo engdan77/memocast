@@ -7,6 +7,7 @@ import io_
 import clipboard_
 import parser_
 from logging_ import logger
+from ui_ import view_factory
 
 
 def parse_clipboard_url():
@@ -19,6 +20,8 @@ def parse_clipboard_url():
     except requests.exceptions.RequestException as e:
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
     logger.info(f'Found following links {links}')
+    view = view_factory()
+    view.show()
 
 
 def main():
