@@ -22,7 +22,11 @@ class PodcastParser:
     def try_all(self):
         links = []
         for subparserclass in self.__class__.__subclasses__():
-            subparser_urls = subparserclass(self.podcast_html).parse()
+            try:
+                subparser_urls = subparserclass(self.podcast_html).parse()
+            except AttributeError as e:
+                logger.warning(f'{subparserclass.__name__} unable to parse: {e.args}')
+                continue
             links.extend(subparser_urls)
         logger.debug(links)
 
