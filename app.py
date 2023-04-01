@@ -1,3 +1,7 @@
+import logging
+
+import requests.exceptions
+
 import __info__ as info
 import io_
 import clipboard_
@@ -10,7 +14,10 @@ def parse_clipboard_url():
     logger.debug(f'Parsing {url}')
     html = io_.download_html(url)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
-    links = parser_.PodcastParser(html).try_all()
+    try:
+        links = parser_.PodcastParser(html).try_all()
+    except requests.exceptions.RequestException as e:
+        logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
     logger.info(f'Found following links {links}')
 
 
