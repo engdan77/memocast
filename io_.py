@@ -17,7 +17,7 @@ def get_device_and_import_modules() -> DeviceType:
 
 def download_html(url: str) -> str:
 	"""Download URL"""
-	r = requests.get(url)
+	r = requests.get(url, verify=False)
 	return r.content.decode()
 
 
