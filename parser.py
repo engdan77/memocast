@@ -13,11 +13,18 @@ class Url:
     description: str
 
 
-class PodcastParser(ABC):
+class PodcastParser:
     def __init__(self, input_html: str):
         """Take HTML as input"""
         self.podcast_html = input_html
         self.title = None
+
+    def try_all(self):
+        links = []
+        for subparserclass in self.__class__.__subclasses__():
+            subparser_urls = subparserclass(self.podcast_html).parse()
+            links.extend(subparser_urls)
+        logger.debug(links)
 
     @abstractmethod
     def parse(self) -> Iterable[Url]:
@@ -42,11 +49,11 @@ class TalkPythonToMeParser(PodcastParser):
     def parse(self) -> Iterable[Url]:
         """Parse and return iterable Urls"""
         logger.info('Start parsing')
-        bs = BeautifulSoup(self.podcast_html, 'html.parser')
         episode_number = self.get_current_episode_number()
         episode_url = self.get_linked_url_podcast_source(episode_number)
         episode_source_html = io_.download_html(episode_url)
-        return [Url('foo', 'bar')]
+        urls = self.get_all_urls_from_podcast_html(episode_source_html)
+        return urls
 
     def get_urls_from_html(self) -> Iterable[Url]:
         """Get URLS from page"""
@@ -62,4 +69,16 @@ class TalkPythonToMeParser(PodcastParser):
         self.title = bs.find('div', class_='wv3SK').text
         return int(self.title.split(':')[0].strip('#'))
 
-
+    def get_all_urls_from_podcast_html(self, episode_source_html: str):
+        bs = BeautifulSoup(episode_source_html, 'html.parser')
+        urls = []
+        for bold_item in bs.find_all('b'):
+            logger.debug(f'Parsing {bold_item}')
+            description = bold_item.text
+            try:
+                url = bold_item.nextSibling.nextSibling.get('href')
+            except AttributeError:
+                logger.debug('Skipping to next ')
+            else:
+                urls.append(Url(url, description))
+        return urls

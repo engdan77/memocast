@@ -10,7 +10,8 @@ def parse_clipboard_url():
     logger.debug(f'Parsing {url}')
     html = io_.download_html(url)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
-    links = parser.PodcastParser(html).parse()
+    links = parser.PodcastParser(html).try_all()
+    logger.info(f'Found following links {links}')
 
 
 def main():
