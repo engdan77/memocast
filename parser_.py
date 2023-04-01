@@ -25,7 +25,7 @@ class PodcastParser:
             try:
                 subparser_urls = subparserclass(self.podcast_html).parse()
             except AttributeError as e:
-                logger.warning(f'{subparserclass.__name__} unable to parse: {e.args}')
+                logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
                 continue
             links.extend(subparser_urls)
         logger.debug(links)
