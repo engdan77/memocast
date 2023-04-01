@@ -77,7 +77,7 @@ class PythonistaPodView(BasePodView, ui.View):
         btn.corner_radius = 3
         btn.background_color = 'blue'
         btn.tint_color = 'white'
-        btn.action = partial(get_all_enabled, podcast_view)
+        btn.action = partial(cls.get_all_enabled, podcast_view)
 
         button = ui.Button(title='Save')
         podcast_view.add_cell(btn)
