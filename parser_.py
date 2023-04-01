@@ -2,7 +2,7 @@ from typing import Iterable
 
 import io_
 from dataclasses import dataclass
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from bs4 import BeautifulSoup
 from logging_ import logger
 
