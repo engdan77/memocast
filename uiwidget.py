@@ -6,7 +6,7 @@ class UrlRow(ui.View):
         self.set_attrs(width=width, height=height, bg_color=bg_color)
         self.text = None
         self.url = None
-        text = kwargs.get('text', 'none')
+        text = 'foo'
         self.add_button_and_label(text)
 
     def set_attrs(self, **kwargs):
