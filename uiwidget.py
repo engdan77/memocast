@@ -2,12 +2,11 @@ import ui
 
 
 class UrlRow(ui.View):
-    def __init__(self, width=200, height=40, bg_color='white'):
+    def __init__(self, width=200, height=40, bg_color='white', url=None):
         self.set_attrs(width=width, height=height, bg_color=bg_color)
-        self.text = None
-        self.url = None
-        text = 'foo'
-        self.add_button_and_label(text)
+        self.url = url
+        self.text = url.description
+        self.add_button_and_label(self.text)
 
     def set_attrs(self, **kwargs):
         for k, v in kwargs.items():

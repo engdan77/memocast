@@ -16,11 +16,11 @@ def parse_clipboard_url():
     html = io_.download_html(url)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
     try:
-        links = parser_.PodcastParser(html).try_all()
+        urls = parser_.PodcastParser(html).try_all()
     except requests.exceptions.RequestException as e:
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
         return
-    logger.info(f'Found following links {links}')
+    logger.info(f'Found following links {urls}')
     podcast_view = view_factory()
     podcast_view().show()
 

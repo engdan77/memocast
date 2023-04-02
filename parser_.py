@@ -7,12 +7,6 @@ from bs4 import BeautifulSoup
 from logging_ import logger
 
 
-@dataclass
-class Url:
-    url: str
-    description: str
-
-
 class PodcastParser:
     def __init__(self, input_html: str):
         """Take HTML as input"""
@@ -84,5 +78,12 @@ class TalkPythonToMeParser(PodcastParser):
             except AttributeError:
                 logger.debug('Skipping to next ')
             else:
-                urls.append(Url(url, description))
+                urls.append(Url(url, description, self))
         return urls
+
+
+@dataclass
+class Url:
+    url: str
+    description: str
+    parser: PodcastParser

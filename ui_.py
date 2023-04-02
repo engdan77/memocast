@@ -1,9 +1,12 @@
 from functools import partial
+from typing import List
 
 from io_ import get_device_and_import_modules
 from enums import DeviceType
 from abc import abstractmethod
 from unittest import mock
+
+from parser_ import Url
 from uiwidget import UrlRow
 
 if get_device_and_import_modules() == DeviceType.ios:
@@ -21,8 +24,9 @@ def view_factory():
 
 class BasePodView:
 
+    @classmethod
     @abstractmethod
-    def show(self):
+    def show(cls, urls: List[Url]):
         """Method expected for showing the UI"""
         ...
 
@@ -60,14 +64,14 @@ class PythonistaPodView(BasePodView, ui.View):
                 print(sw.switch.value)
 
     @classmethod
-    def show(cls):
+    def show(cls, urls: List[Url]):
         w = 600
         h = 800
         f = (0, 0, w, h)
         podcast_view = cls(frame=f, bg_color='white')
 
-        for r in range(50):
-            cell = UrlRow(width=200, height=40, bg_color='white')
+        for url in urls:
+            cell = UrlRow(width=200, height=40, bg_color='white', url=url)
             podcast_view.add_cell(cell)
 
         btn = ui.Button(name='save', frame=(0, 0, 90, 64))
