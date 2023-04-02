@@ -1,10 +1,10 @@
 from typing import Iterable
 
 import io_
-from dataclasses import dataclass
 from abc import abstractmethod
 from bs4 import BeautifulSoup
 from logging_ import logger
+from protocols import Url
 
 
 class PodcastParser:
@@ -38,7 +38,6 @@ class PodcastParser:
     def get_current_episode_number(self) -> int:
         """Get episode number from html"""
         ...
-
 
 
 class TalkPythonToMeParser(PodcastParser):
@@ -80,10 +79,3 @@ class TalkPythonToMeParser(PodcastParser):
             else:
                 urls.append(Url(url, description, self))
         return urls
-
-
-@dataclass
-class Url:
-    url: str
-    description: str
-    parser: PodcastParser

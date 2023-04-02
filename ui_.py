@@ -2,11 +2,10 @@ from functools import partial
 from typing import List
 
 from io_ import get_device_and_import_modules
-from enums import DeviceType
 from abc import abstractmethod
 from unittest import mock
 
-from parser_ import Url
+from protocols import Url, DeviceType
 from uiwidget import UrlRow
 
 if get_device_and_import_modules() == DeviceType.ios:
