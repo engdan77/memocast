@@ -1,7 +1,7 @@
 from enum import Enum
 import requests
 
-from protocols_ import DeviceType
+from protocols import DeviceType
 
 
 def get_device_and_import_modules() -> DeviceType:

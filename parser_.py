@@ -4,7 +4,8 @@ import io_
 from abc import abstractmethod
 from bs4 import BeautifulSoup
 from logging_ import logger
-from protocols_ import Url
+from typing import TYPE_CHECKING
+import protocols
 
 
 class PodcastParser:
@@ -25,7 +26,7 @@ class PodcastParser:
         logger.debug(links)
 
     @abstractmethod
-    def parse(self) -> Iterable[Url]:
+    def parse(self) -> Iterable[protocols.Url]:
         """Parse and return iterable Urls"""
         ...
 
@@ -43,7 +44,7 @@ class PodcastParser:
 class TalkPythonToMeParser(PodcastParser):
     base_url = 'http://talkpython.fm'
 
-    def parse(self) -> Iterable[Url]:
+    def parse(self) -> Iterable[protocols.Url]:
         """Parse and return iterable Urls"""
         logger.info('Start parsing')
         episode_number = self.get_current_episode_number()
@@ -52,7 +53,7 @@ class TalkPythonToMeParser(PodcastParser):
         urls = self.get_all_urls_from_podcast_html(episode_source_html)
         return urls
 
-    def get_urls_from_html(self) -> Iterable[Url]:
+    def get_urls_from_html(self) -> Iterable[protocols.Url]:
         """Get URLS from page"""
         return []
 
@@ -77,5 +78,5 @@ class TalkPythonToMeParser(PodcastParser):
             except AttributeError:
                 logger.debug('Skipping to next ')
             else:
-                urls.append(Url(url, description, self))
+                urls.append(protocols.Url(url, description, self))
         return urls

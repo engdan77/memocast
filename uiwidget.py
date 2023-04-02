@@ -1,4 +1,7 @@
-import ui
+from io_ import get_device_and_import_modules
+from protocols import DeviceType
+if get_device_and_import_modules() == DeviceType.ios:
+    import ui
 
 
 class UrlRow(ui.View):

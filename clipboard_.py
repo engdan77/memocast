@@ -1,7 +1,7 @@
 import random
 from abc import ABC, abstractmethod
 
-from protocols_ import DeviceType
+from protocols import DeviceType
 from io_ import get_device_and_import_modules
 
 
