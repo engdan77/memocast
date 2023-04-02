@@ -5,7 +5,7 @@ from io_ import get_device_and_import_modules
 from abc import abstractmethod
 from unittest import mock
 
-from protocols import Url, DeviceType
+from protocols_ import Url, DeviceType
 from uiwidget import UrlRow
 
 if get_device_and_import_modules() == DeviceType.ios:
