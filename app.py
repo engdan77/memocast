@@ -22,7 +22,7 @@ def parse_clipboard_url():
         return
     logger.info(f'Found following links {urls}')
     podcast_view = view_factory()
-    podcast_view().show()
+    podcast_view().show(urls)
 
 
 def main():
