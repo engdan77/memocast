@@ -20,10 +20,11 @@ class UrlRow(ui.View):
         self.text = text
         self.url = url
         lb = ui.Label()
-        lb.text = text
+        lb.text = "__________" + text
         lb.font = ('Arial Rounded MT Bold', 15)
         lb.size_to_fit()
-        lb.center = self.center
+        # lb.center = self.center
+        # lb.alignment = ui.ALIGN_RIGHT
         self.add_subview(lb)
         self.switch = ui.Switch()
         self.add_subview(self.switch)

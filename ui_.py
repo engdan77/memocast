@@ -70,7 +70,7 @@ class PythonistaPodView(BasePodView, ui.View):
         podcast_view = cls(frame=f, bg_color='white')
 
         for url in urls:
-            cell = UrlRow(width=200, height=40, bg_color='white', url=url)
+            cell = UrlRow(width=500, height=40, bg_color='white', url=url)
             podcast_view.add_cell(cell)
 
         btn = ui.Button(name='save', frame=(0, 0, 90, 64))
