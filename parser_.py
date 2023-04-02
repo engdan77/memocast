@@ -24,6 +24,7 @@ class PodcastParser:
                 continue
             links.extend(subparser_urls)
         logger.debug(links)
+        return links
 
     @abstractmethod
     def parse(self) -> Iterable[protocols.Url]:
