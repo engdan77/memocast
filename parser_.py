@@ -9,6 +9,7 @@ import protocols
 
 
 class PodcastParser:
+
     def __init__(self, input_html: str):
         """Take HTML as input"""
         self.podcast_html = input_html
@@ -25,6 +26,9 @@ class PodcastParser:
             links.extend(subparser_urls)
         logger.debug(links)
         return links
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}'
 
     @abstractmethod
     def parse(self) -> Iterable[protocols.Url]:

@@ -29,8 +29,10 @@ def main():
     logger.info(f'Starting {info.__pkg__} {info.__version__}')
     device = io_.get_device_and_import_modules()
     logger.info(f'Identified {device} device')
-    parse_clipboard_url()
-
+    try:
+        parse_clipboard_url()
+    except requests.exceptions.RequestException as e:
+        logger.error(f'Unable to parse URL: {e.args}')
 
 if __name__ == '__main__':
     main()

@@ -11,6 +11,9 @@ class UrlRow(ui.View):
         self.text = url.description
         self.add_button_and_label(self.text)
 
+    def __str__(self):
+        return f'{self.url}'
+
     def set_attrs(self, **kwargs):
         for k, v in kwargs.items():
             if hasattr(self, k):
@@ -18,14 +21,12 @@ class UrlRow(ui.View):
 
     def add_button_and_label(self, text, url='none'):
         self.text = text
-        self.url = url
+        # self.url = url
         lb = ui.Label()
         lb.text = text
         lb.x = 100
         lb.font = ('Arial Rounded MT Bold', 15)
         lb.size_to_fit()
-        # lb.center = self.center
-        # lb.alignment = ui.ALIGN_RIGHT
         self.add_subview(lb)
         self.switch = ui.Switch()
         self.add_subview(self.switch)

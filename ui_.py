@@ -57,9 +57,12 @@ class PythonistaPodView(BasePodView, ui.View):
 
     def get_all_enabled(self, button):
         """Get all enabled URLs from view"""
+        print('='*30)
         for sw in self.cells:
-            if hasattr(sw, 'switch'):
-                print(sw.switch.value)
+            if hasattr(sw, 'switch') and sw.switch is not None:
+                switch_enabled = sw.switch.value
+                if switch_enabled:
+                    print(sw.url)
         self.close()
 
     @classmethod
