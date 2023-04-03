@@ -20,7 +20,8 @@ class UrlRow(ui.View):
         self.text = text
         self.url = url
         lb = ui.Label()
-        lb.text = "__________" + text
+        lb.text = text
+        lb.x = 100
         lb.font = ('Arial Rounded MT Bold', 15)
         lb.size_to_fit()
         # lb.center = self.center

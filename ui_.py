@@ -55,12 +55,12 @@ class PythonistaPodView(BasePodView, ui.View):
         self.sv.content_size = (0, self.height_cache)
         self.sv.add_subview(cell)
 
-    def get_all_enabled(*args):
+    def get_all_enabled(self, button):
         """Get all enabled URLs from view"""
-        podcast_view, button = args
-        for sw in podcast_view.cells:
+        for sw in self.cells:
             if hasattr(sw, 'switch'):
                 print(sw.switch.value)
+        self.close()
 
     @classmethod
     def show(cls, urls: List[Url]):
@@ -84,4 +84,4 @@ class PythonistaPodView(BasePodView, ui.View):
 
         button = ui.Button(title='Save')
         podcast_view.add_cell(btn)
-        podcast_view.present('sheet')
+        podcast_view.present('fullscreen')
