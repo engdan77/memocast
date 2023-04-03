@@ -24,7 +24,6 @@ class PodcastParser:
                 logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
                 continue
             links.extend(subparser_urls)
-        logger.debug(links)
         return links
 
     def __repr__(self):
@@ -45,9 +44,17 @@ class PodcastParser:
         """Get episode number from html"""
         ...
 
+    @abstractmethod
+    def get_podcast_short_name(self) -> str:
+        """Return the a short name of the podcast"""
+        ...
+
 
 class TalkPythonToMeParser(PodcastParser):
     base_url = 'http://talkpython.fm'
+
+    def get_podcast_short_name(self) -> str:
+        return "TalkPython"
 
     def parse(self) -> Iterable[protocols.Url]:
         """Parse and return iterable Urls"""

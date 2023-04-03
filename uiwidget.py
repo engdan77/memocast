@@ -19,9 +19,8 @@ class UrlRow(ui.View):
             if hasattr(self, k):
                 setattr(self, k, v)
 
-    def add_button_and_label(self, text, url='none'):
+    def add_button_and_label(self, text):
         self.text = text
-        # self.url = url
         lb = ui.Label()
         lb.text = text
         lb.x = 100

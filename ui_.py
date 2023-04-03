@@ -1,5 +1,6 @@
 from functools import partial
 from typing import List
+from logging_ import logger
 
 from io_ import get_device_and_import_modules
 from abc import abstractmethod
@@ -29,6 +30,12 @@ class BasePodView:
         """Method expected for showing the UI"""
         ...
 
+    def add_urls_to_reminder(self, urls: List[Url]):
+        """The view is responsible to use this method that will add URLs to ios reminder"""
+        print(urls)
+        for url in urls:
+            logger.info(f'Adding to reminder: {url}')
+
 
 class PythonistaPodView(BasePodView, ui.View):
     tm = 20  # top margin
@@ -57,12 +64,12 @@ class PythonistaPodView(BasePodView, ui.View):
 
     def get_all_enabled(self, button):
         """Get all enabled URLs from view"""
-        print('='*30)
+        enabled_urls = []
         for sw in self.cells:
             if hasattr(sw, 'switch') and sw.switch is not None:
-                switch_enabled = sw.switch.value
-                if switch_enabled:
-                    print(sw.url)
+                if sw.switch.value is True:
+                    enabled_urls.append(sw.url)
+        self.add_urls_to_reminder(enabled_urls)
         self.close()
 
     @classmethod
@@ -84,7 +91,5 @@ class PythonistaPodView(BasePodView, ui.View):
         btn.background_color = 'blue'
         btn.tint_color = 'white'
         btn.action = partial(cls.get_all_enabled, podcast_view)
-
-        button = ui.Button(title='Save')
         podcast_view.add_cell(btn)
         podcast_view.present('fullscreen')

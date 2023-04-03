@@ -20,7 +20,6 @@ def parse_clipboard_url():
     except requests.exceptions.RequestException as e:
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
         return
-    logger.info(f'Found following links {urls}')
     podcast_view = view_factory()
     podcast_view().show(urls)
 
