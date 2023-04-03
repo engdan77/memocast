@@ -1,10 +1,8 @@
 from typing import Iterable
-
 import io_
 from abc import abstractmethod
 from bs4 import BeautifulSoup
 from logging_ import logger
-from typing import TYPE_CHECKING
 import protocols
 
 
@@ -14,6 +12,7 @@ class PodcastParser:
         """Take HTML as input"""
         self.podcast_html = input_html
         self.title = None
+        self.episode_number = None
 
     def try_all(self):
         links = []
@@ -75,6 +74,8 @@ class TalkPythonToMeParser(PodcastParser):
 
     def get_current_episode_number(self) -> int:
         """Get episode number from html"""
+        if self.episode_number:
+            return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
         self.title = bs.find('div', class_='wv3SK').text
         return int(self.title.split(':')[0].strip('#'))

@@ -8,6 +8,7 @@ from unittest import mock
 
 from protocols import Url, DeviceType
 from uiwidget import UrlRow
+from reminder_ import add_reminder_from_url
 
 if get_device_and_import_modules() == DeviceType.ios:
     import ui
@@ -35,6 +36,7 @@ class BasePodView:
         print(urls)
         for url in urls:
             logger.info(f'Adding to reminder: {url}')
+            add_reminder_from_url(url)
 
 
 class PythonistaPodView(BasePodView, ui.View):
