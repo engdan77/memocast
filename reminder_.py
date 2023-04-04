@@ -11,4 +11,4 @@ def add_reminder_from_url(url: Url):
     r.url = url.url
     r.notes = f'{short_podname} #{episode_number}'
     r.save()
-    logger(f'Reminder added for {r.title}')
+    logger.info(f'Reminder added for {r.title}')
