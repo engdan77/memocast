@@ -33,6 +33,7 @@ def test_reminder():
         print(r)
 
 def main():
+    test_reminder()
     logger.info(f'Starting {info.__pkg__} {info.__version__}')
     device = io_.get_device_and_import_modules()
     logger.info(f'Identified {device} device')
