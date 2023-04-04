@@ -8,7 +8,6 @@ def add_reminder_from_url(url: Url):
     short_podname = url.parser.get_podcast_short_name()
     episode_number = url.parser.get_current_episode_number()
     r.title = url.description
-    r.url = 'http://www.abc.se'
-    r.notes = f'{short_podname} #{episode_number}'
+    r.notes = f'{short_podname} #{episode_number} - {url.url}'
     r.save()
     logger.info(f'Reminder added for {r.title}')

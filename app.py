@@ -25,17 +25,7 @@ def parse_clipboard_url():
     podcast_view().show(urls)
 
 
-def test_reminder():
-    todo = reminders.get_reminders(completed=False)
-    print('TODO List')
-    print('=========')
-    for r in todo:
-        if 'foo' in r.title.lower():
-            print(r.title)
-            print(r.url)
-
 def main():
-    test_reminder()
     logger.info(f'Starting {info.__pkg__} {info.__version__}')
     device = io_.get_device_and_import_modules()
     logger.info(f'Identified {device} device')
