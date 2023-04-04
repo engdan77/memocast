@@ -30,7 +30,9 @@ def test_reminder():
     print('TODO List')
     print('=========')
     for r in todo:
-        print(r)
+        if 'foo' in r.title.lower():
+            print(r.title)
+            print(r.url)
 
 def main():
     test_reminder()
