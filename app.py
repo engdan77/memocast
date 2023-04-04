@@ -8,6 +8,7 @@ import clipboard_
 import parser_
 from logging_ import logger
 from ui_ import view_factory
+import reminders
 
 
 def parse_clipboard_url():
@@ -23,6 +24,13 @@ def parse_clipboard_url():
     podcast_view = view_factory()
     podcast_view().show(urls)
 
+
+def test_reminder():
+    todo = reminders.get_reminders(completed=False)
+    print('TODO List')
+    print('=========')
+    for r in todo:
+        print(r)
 
 def main():
     logger.info(f'Starting {info.__pkg__} {info.__version__}')
