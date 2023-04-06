@@ -17,5 +17,3 @@ def download_html(url: str) -> str:
 	"""Download URL"""
 	r = requests.get(url, verify=False)
 	return r.content.decode()
-
-

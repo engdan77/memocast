@@ -4,6 +4,7 @@ from podparse import io_
 from podparse import clipboard_
 import podparse.parsers.baseclass
 from podparse.logging_ import logger
+from podparse.shareios import get_share_url_from_ios
 from podparse.ui_ import view_factory
 from podparse.io_ import get_device_and_import_modules
 from podparse.protocols import DeviceType
@@ -11,7 +12,9 @@ from podparse.protocols import DeviceType
 
 def parse_clipboard_url():
     """Function for parsing the clipboard URL"""
-    url = clipboard_.get_clipboard_instance().get()
+    url = get_share_url_from_ios()
+    if not url:
+        url = clipboard_.get_clipboard_instance().get_and_verify()
     logger.debug(f'Parsing {url}')
     html = io_.download_html(url)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
