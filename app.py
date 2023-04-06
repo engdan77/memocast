@@ -15,6 +15,9 @@ def parse_clipboard_url():
     url = get_share_url_from_ios()
     if not url:
         url = clipboard_.get_clipboard_instance().get_and_verify()
+        logger.info('Unable to get URL from share in IOS, using clipboard instead')
+    else:
+        logger.info('Got URL from share in IOS')
     logger.debug(f'Parsing {url}')
     html = io_.download_html(url)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
