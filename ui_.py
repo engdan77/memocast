@@ -12,6 +12,11 @@ from reminder_ import add_reminder_from_url
 
 if get_device_and_import_modules() == DeviceType.ios:
     import ui
+else:
+    class FakeClass:
+        ...
+    ui = mock.Mock()
+    ui.View = FakeClass
 
 
 def view_factory():

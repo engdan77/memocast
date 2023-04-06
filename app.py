@@ -1,14 +1,12 @@
-import logging
-
 import requests.exceptions
-
 import __info__ as info
 import io_
 import clipboard_
 import parser_
 from logging_ import logger
 from ui_ import view_factory
-import reminders
+from io_ import get_device_and_import_modules
+from protocols import DeviceType
 
 
 def parse_clipboard_url():
@@ -22,6 +20,7 @@ def parse_clipboard_url():
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
         return
     podcast_view = view_factory()
+    assert get_device_and_import_modules() == DeviceType.ios, 'This is not an IOS device, exiting'
     podcast_view().show(urls)
 
 

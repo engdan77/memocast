@@ -1,7 +1,10 @@
 from io_ import get_device_and_import_modules
 from protocols import DeviceType
+from unittest import mock
 if get_device_and_import_modules() == DeviceType.ios:
     import ui
+else:
+    ui = mock.Mock()
 
 
 class UrlRow(ui.View):
