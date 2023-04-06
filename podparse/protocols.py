@@ -1,8 +1,5 @@
 from enum import Enum
 from .dataclasses import dataclass
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from podparse.parsers.baseclass import BasePodcastParser
 
 
 @dataclass
