@@ -24,7 +24,7 @@ class IosClipboard(BaseClipboard):
 
 	def _get(self) -> str:
 		import clipboard
-		return clipboard._get()
+		return clipboard.get()
 
 
 class MockClipboard(BaseClipboard):

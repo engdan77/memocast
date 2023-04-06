@@ -552,7 +552,7 @@ def _is_classvar(a_type, typing):
 
 def _is_initvar(a_type, dataclasses):
     # The module we're checking against is the module we're
-    # currently in (dataclasses.py).
+    # currently in (dataclasses_.py).
     return a_type is dataclasses.InitVar
 
 
@@ -666,7 +666,7 @@ def _get_field(cls, a_name, a_type):
     # then it's an InitVar.
     if f._field_type is _FIELD:
         # The module we're checking against is the module we're
-        # currently in (dataclasses.py).
+        # currently in (dataclasses_.py).
         dataclasses = sys.modules[__name__]
         if (_is_initvar(a_type, dataclasses)
             or (isinstance(f.type, str)
@@ -792,7 +792,7 @@ def _process_class(cls, init, repr, eq, order, unsafe_hash, frozen):
     # actual default value.  Pseudo-fields ClassVars and InitVars are
     # included, despite the fact that they're not real fields.  That's
     # dealt with later.
-    cls_annotations = cls.__dict__._get('__annotations__', {})
+    cls_annotations = cls.__dict__.get('__annotations__', {})
 
     # Now find fields in our class.  While doing so, validate some
     # things, and set the default values (as class attributes) where
@@ -844,7 +844,7 @@ def _process_class(cls, init, repr, eq, order, unsafe_hash, frozen):
     # set __hash__ to None.  This is a heuristic, as it's possible
     # that such a __hash__ == None was not auto-generated, but it
     # close enough.
-    class_hash = cls.__dict__._get('__hash__', MISSING)
+    class_hash = cls.__dict__.get('__hash__', MISSING)
     has_explicit_hash = not (class_hash is MISSING or
                              (class_hash is None and '__eq__' in cls.__dict__))
 

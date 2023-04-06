@@ -1,5 +1,5 @@
 from enum import Enum
-from .dataclasses import dataclass
+from .dataclasses_ import dataclass
 
 
 @dataclass
