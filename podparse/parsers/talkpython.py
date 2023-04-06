@@ -1,55 +1,13 @@
 from typing import Iterable
-import io_
-from abc import abstractmethod
+from .. import io_
 from bs4 import BeautifulSoup
-from logging_ import logger
-import protocols
+from podparse.logging_ import logger
+from .. import protocols
+
+from .baseclass import BasePodcastParser
 
 
-class PodcastParser:
-
-    def __init__(self, input_html: str):
-        """Take HTML as input"""
-        self.podcast_html = input_html
-        self.title = None
-        self.episode_number = None
-
-    def try_all(self):
-        links = []
-        for subparserclass in self.__class__.__subclasses__():
-            try:
-                subparser_urls = subparserclass(self.podcast_html).parse()
-            except AttributeError as e:
-                logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
-                continue
-            links.extend(subparser_urls)
-        return links
-
-    def __repr__(self):
-        return f'{self.__class__.__name__}'
-
-    @abstractmethod
-    def parse(self) -> Iterable[protocols.Url]:
-        """Parse and return iterable Urls"""
-        ...
-
-    @abstractmethod
-    def get_linked_url_podcast_source(self, episode_number) -> str:
-        """Get source URL based on episode in podcast page"""
-        ...
-
-    @abstractmethod
-    def get_current_episode_number(self) -> int:
-        """Get episode number from html"""
-        ...
-
-    @abstractmethod
-    def get_podcast_short_name(self) -> str:
-        """Return the a short name of the podcast"""
-        ...
-
-
-class TalkPythonToMeParser(PodcastParser):
+class TalkPythonToMeParserBase(BasePodcastParser):
     base_url = 'http://talkpython.fm'
 
     def get_podcast_short_name(self) -> str:
@@ -84,7 +42,7 @@ class TalkPythonToMeParser(PodcastParser):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
         urls = []
         for bold_item in bs.find_all('b'):
-            logger.debug(f'Parsing {bold_item}')
+            logger.debug(f'Found URL item {bold_item}')
             description = bold_item.text
             try:
                 url = bold_item.nextSibling.nextSibling.get('href')

@@ -1,5 +1,5 @@
 import logging
-from __info__ import __pkg__
+from podparse import __pkg__
 
 
 class Logger(object):
@@ -9,7 +9,7 @@ class Logger(object):
         """Create a singletone"""
         if not cls._logger:
             cls._logger = super().__new__(cls)
-            logging.basicConfig(level=logging.DEBUG, format='%(asctime)s: %(message)s')
+            logging.basicConfig(level=logging.DEBUG, format='>>> %(message)s\n')
             cls._logger = logging.getLogger(__pkg__)
         return cls._logger
 

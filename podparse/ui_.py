@@ -1,14 +1,14 @@
 from functools import partial
 from typing import List
-from logging_ import logger
+from .logging_ import logger
 
-from io_ import get_device_and_import_modules
+from .io_ import get_device_and_import_modules
 from abc import abstractmethod
 from unittest import mock
 
-from protocols import Url, DeviceType
-from uiwidget import UrlRow
-from reminder_ import add_reminder_from_url
+from .protocols import Url, DeviceType
+from .uiwidget import UrlRow
+from .reminder_ import add_reminder_from_url
 
 if get_device_and_import_modules() == DeviceType.ios:
     import ui

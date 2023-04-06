@@ -1,6 +1,6 @@
-from io_ import get_device_and_import_modules
-from protocols import Url, DeviceType
-from logging_ import logger
+from .io_ import get_device_and_import_modules
+from .protocols import Url, DeviceType
+from .logging_ import logger
 from unittest import mock
 if get_device_and_import_modules() == DeviceType.ios:
     import reminders

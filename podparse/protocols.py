@@ -1,15 +1,15 @@
 from enum import Enum
-from dataclasses import dataclass
+from .dataclasses import dataclass
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from parser_ import PodcastParser
+    from podparse.parsers.baseclass import BasePodcastParser
 
 
 @dataclass
 class Url:
     url: str
     description: str
-    parser: "PodcastParser"
+    parser: "BasePodcastParser"
 
 
 class DeviceType(str, Enum):
