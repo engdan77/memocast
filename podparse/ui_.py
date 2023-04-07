@@ -109,4 +109,4 @@ class PythonistaPodView(BasePodView, ui.View):
 
     def get_option(self, options: List[str], title: str = '') -> Union[str, None]:
         option_index = console.alert('', title, *options, hide_cancel_button=False)
-        return options[option_index]
+        return options[option_index - 1]
