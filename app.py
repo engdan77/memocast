@@ -2,6 +2,7 @@ import requests.exceptions
 import podparse as info
 from podparse import io_
 from podparse import clipboard_
+import podparse.parsers  # This to import all parsers as subclassed (allow those as plugins)
 import podparse.parsers.baseclass
 from podparse.logging_ import logger
 from podparse.shareios import get_share_url_from_ios
@@ -14,26 +15,27 @@ logger.setLevel('DEBUG')
 
 def parse_clipboard_url():
     """Function for parsing the clipboard URL"""
-    url = None
+    links = []
+    link = None
     try:
-        url = get_share_url_from_ios()
+        link = get_share_url_from_ios()
     except ModuleNotFoundError:
         logger.info('Unable to get URL from share in IOS, using clipboard instead')
-    if not url:
-        url = clipboard_.get_clipboard_instance().get_and_verify()
+    if not link:
+        link = clipboard_.get_clipboard_instance().get_and_verify()
     else:
         logger.info('Got URL from share in IOS')
-    logger.debug(f'Parsing {url}')
-    html = io_.download_html(url)
+    logger.debug(f'Parsing {link}')
+    html = io_.download_html(link)
     logger.debug(f'Downloaded HTML {len(html)} bytes')
     try:
-        urls = podparse.parsers.baseclass.BasePodcastParser(html).try_all()
+        links = podparse.parsers.baseclass.BasePodcastParser(html).try_all()
     except requests.exceptions.RequestException as e:
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
         return
     assert get_device_and_import_modules() == DeviceType.ios, 'This is not an IOS device, exiting'
     podcast_view = view_factory()
-    podcast_view().show(urls)
+    podcast_view().show(links)
 
 
 def main():
