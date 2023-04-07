@@ -9,13 +9,18 @@ from podparse.ui_ import view_factory
 from podparse.io_ import get_device_and_import_modules
 from podparse.protocols import DeviceType
 
+logger.setLevel('DEBUG')
+
 
 def parse_clipboard_url():
     """Function for parsing the clipboard URL"""
-    url = get_share_url_from_ios()
+    url = None
+    try:
+        url = get_share_url_from_ios()
+    except ModuleNotFoundError:
+        logger.info('Unable to get URL from share in IOS, using clipboard instead')
     if not url:
         url = clipboard_.get_clipboard_instance().get_and_verify()
-        logger.info('Unable to get URL from share in IOS, using clipboard instead')
     else:
         logger.info('Got URL from share in IOS')
     logger.debug(f'Parsing {url}')

@@ -1,6 +1,6 @@
 import logging
 from podparse import __pkg__
-
+import builtins
 
 class Logger(object):
     _logger = None
@@ -12,6 +12,10 @@ class Logger(object):
             logging.basicConfig(level=logging.DEBUG, format='>>> %(message)s\n')
             cls._logger = logging.getLogger(__pkg__)
         return cls._logger
+
+    @classmethod
+    def set_level(cls, loglevel='DEBUG'):
+        cls._logger.setLevel(getattr(logging, loglevel))
 
 
 logger = Logger()
