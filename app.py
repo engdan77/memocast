@@ -19,12 +19,13 @@ def process_podcast():
     """Function for parsing the clipboard URL"""
     html = get_html_source()
     links = get_links(html)
-    duplicate_matching_parser = get_duplicate_matched_parsers(links)
+    duplicate_matching_parsers = get_duplicate_matched_parsers(links)
+    logger.debug(f'Duplicate parsers: {duplicate_matching_parsers}')
     assert get_device_and_import_modules() == DeviceType.ios, 'This is not an IOS device, exiting'
     podcast_view = view_factory()  # Could potentially be extended in future for other that IOS
-    if duplicate_matching_parser:
-        logger.warning(f'Found more than one parser, ask for which to use: {duplicate_matching_parser}')
-        correct_parser = podcast_view.get_option(duplicate_matching_parser, 'What parser to use?')
+    if duplicate_matching_parsers:
+        logger.warning(f'Found more than one parser, ask for which to use: {duplicate_matching_parsers}')
+        correct_parser = podcast_view.get_option(duplicate_matching_parsers, 'What parser to use?')
         logger.info(f'Selecting {correct_parser}')
         links = filter_parser(links, correct_parser)
     podcast_view().show(links)
