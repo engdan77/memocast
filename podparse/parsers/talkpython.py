@@ -8,7 +8,7 @@ from .baseclass import BasePodcastParser
 
 
 class TalkPythonToMeParser(BasePodcastParser):
-    base_url = 'http://talkpython.fm'
+    base_url = 'https://talkpython.fm'
 
     def get_podcast_short_name(self) -> str:
         return "TalkPython"
@@ -36,7 +36,7 @@ class TalkPythonToMeParser(BasePodcastParser):
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
         self.title = bs.find('div', class_='wv3SK').text
-        return int(self.title.split(' ')[0].strip('#'))
+        return int(self.title.split(':')[0].strip('#'))
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
