@@ -2,6 +2,7 @@ from abc import abstractmethod
 from typing import Iterable
 from podparse import protocols
 from ..logging_ import logger
+from ..exceptions import ParserException
 
 
 class BasePodcastParser:
@@ -15,15 +16,19 @@ class BasePodcastParser:
     def try_all(self):
         links = []
         for subparserclass in self.__class__.__subclasses__():
-            logger.debug(f'Attempt {subparserclass.get_podcast_short_name()} parser')
+            class_shortname = subparserclass.get_podcast_short_name()
+            logger.debug(f'Attempt use of {class_shortname} parser')
             try:
                 subparser_urls = subparserclass(self.podcast_html).parse()
             except AttributeError as e:
                 logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
                 continue
-            logger.debug(f'Found {len(subparser_urls)} links')
+            except ValueError as e:
+                logger.warning(f'Unable to parse using {class_shortname}: {e.args}, continue to next')
+                continue
+            logger.debug(f'Found {len(list(subparser_urls))} links')
             links.extend(subparser_urls)
-        logger.debug(f'Found total {len(links)}')
+        logger.debug(f'Found total {len(links)} using {class_shortname}')
         return links
 
     def __repr__(self):
@@ -44,7 +49,8 @@ class BasePodcastParser:
         """Get episode number from html"""
         ...
 
+    @staticmethod
     @abstractmethod
-    def get_podcast_short_name(self) -> str:
-        """Return the a short name of the podcast"""
+    def get_podcast_short_name() -> str:
+        """Return the short name of the podcast"""
         ...
