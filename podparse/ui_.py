@@ -1,5 +1,5 @@
 from functools import partial
-from typing import List
+from typing import List, Union
 from .logging_ import logger
 
 from .io_ import get_device_and_import_modules
@@ -12,6 +12,7 @@ from .reminder_ import add_reminder_from_url
 
 if get_device_and_import_modules() == DeviceType.ios:
     import ui
+    import console
 else:
     class FakeClass:
         ...
@@ -42,6 +43,11 @@ class BasePodView:
         for url in urls:
             logger.info(f'Adding to reminder: {url}')
             add_reminder_from_url(url)
+
+    @abstractmethod
+    def get_option(self, options: List[str], title='') -> Union[str, None]:
+        """UI for displaying options (buttons) to be selected"""
+        ...
 
 
 class PythonistaPodView(BasePodView, ui.View):
@@ -100,3 +106,7 @@ class PythonistaPodView(BasePodView, ui.View):
         btn.action = partial(cls.get_all_enabled, podcast_view)
         podcast_view.add_cell(btn)
         podcast_view.present('fullscreen')
+
+    def get_option(self, options: List[str], title='') -> Union[str, None]:
+        option_index = console.alert(title, options, hide_cancel_button=False)
+        return options[option_index]
