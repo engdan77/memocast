@@ -10,7 +10,8 @@ from .baseclass import BasePodcastParser
 class PythonBytesParser(BasePodcastParser):
     base_url = 'https://pythonbytes.fm'
 
-    def get_podcast_short_name(self) -> str:
+    @staticmethod
+    def get_podcast_short_name() -> str:
         return "PythonBytes"
 
     def parse(self) -> Iterable[protocols.Url]:

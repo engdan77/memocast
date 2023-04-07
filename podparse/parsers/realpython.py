@@ -11,7 +11,8 @@ class RealPythonParser(BasePodcastParser):
     # base_url = 'https://realpython.com/podcasts/rpp'
     base_url = 'https://talkpython.fm'
 
-    def get_podcast_short_name(self) -> str:
+    @staticmethod
+    def get_podcast_short_name() -> str:
         return "RealPython"
 
     def parse(self) -> Iterable[protocols.Url]:

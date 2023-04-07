@@ -10,7 +10,8 @@ from .baseclass import BasePodcastParser
 class TalkPythonToMeParser(BasePodcastParser):
     base_url = 'https://talkpython.fm'
 
-    def get_podcast_short_name(self) -> str:
+    @staticmethod
+    def get_podcast_short_name() -> str:
         return "TalkPython"
 
     def parse(self) -> Iterable[protocols.Url]:
