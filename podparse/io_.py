@@ -1,5 +1,9 @@
 import requests
 from .protocols import DeviceType
+from urllib3.exceptions import InsecureRequestWarning
+import urllib3
+
+urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def get_device_and_import_modules() -> DeviceType:
