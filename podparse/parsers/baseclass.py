@@ -24,7 +24,7 @@ class BasePodcastParser:
                 logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
                 continue
             except ValueError as e:
-                logger.warning(f'Unable to parse using {class_shortname}: {e.args}, continue to next')
+                logger.warning(f'Unable to parse using {class_shortname}: {e.args}, SKIP TO NEXT PARSER')
                 continue
             logger.debug(f'Found {len(list(subparser_urls))} links')
             links.extend(subparser_urls)

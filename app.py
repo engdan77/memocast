@@ -23,12 +23,13 @@ def process_podcast():
     logger.debug(f'Duplicate parsers: {parsers_matching}')
     assert get_device_and_import_modules() == DeviceType.ios, 'This is not an IOS device, exiting'
     podcast_view = view_factory()  # Could potentially be extended in future for other that IOS
+    pv = podcast_view()
     if len(parsers_matching) > 1:
         logger.warning(f'Found more than one parser, ask for which to use: {parsers_matching}')
-        correct_parser = podcast_view.get_option(list(parsers_matching), 'What parser to use?')
+        correct_parser = pv.get_option(parsers_matching, 'What parser to use?')
         logger.info(f'Selecting {correct_parser}')
         links = filter_parser(links, correct_parser)
-    podcast_view().show(links)
+    pv.show(links)
 
 
 def filter_parser(links: List[Url], parser_name: str) -> List[Url]:
@@ -36,7 +37,7 @@ def filter_parser(links: List[Url], parser_name: str) -> List[Url]:
 
 
 def get_duplicate_matched_parsers(links: List[Url]):
-    return {_.parser.get_podcast_short_name() for _ in links}
+    return list({_.parser.get_podcast_short_name() for _ in links})
 
 
 def get_links(html):
