@@ -29,17 +29,11 @@ def test_get_current_episode_number(episode_number):
 
 
 def test_get_linked_url_podcast_source(linked_url):
-    assert linked_url == 'http://talkpython.fm/329'
+    assert linked_url == 'https://pythonbytes.fm/329'
 
 
 def test_parse(parser):
-    urls = parser.parse()
-    assert urls == 'foo'
+    links = parser.parse()
+    assert len(links) == 24, 'Wrong number of URL retrieved'
+    assert all(link.url.startswith(('http', 'mailto')) for link in links), "One of the URL not being valid"
 
-
-def test_get_urls_from_html():
-    assert False
-
-
-def test_get_all_urls_from_podcast_html():
-    assert False
