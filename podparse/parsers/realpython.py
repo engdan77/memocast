@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, Optional
 from .. import io_
 from bs4 import BeautifulSoup
 from podparse.logging_ import logger
@@ -8,8 +8,7 @@ from .baseclass import BasePodcastParser
 
 
 class RealPythonParser(BasePodcastParser):
-    # base_url = 'https://realpython.com/podcasts/rpp'
-    base_url = 'https://talkpython.fm'
+    base_url = 'https://realpython.com/podcasts/rpp'
 
     @staticmethod
     def get_podcast_short_name() -> str:
@@ -38,7 +37,17 @@ class RealPythonParser(BasePodcastParser):
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
         self.title = bs.find('div', class_='wv3SK').text
-        return int(self.title.split(':')[0].strip('#'))
+        episode_number = self.get_episode_number_amongst_all(self.title)
+        return episode_number
+
+    def get_episode_number_amongst_all(self, description: str) -> Optional[int]:
+        html = io_.download_html(self.base_url)
+        bs = BeautifulSoup(html, 'html.parser')
+        episode_number = None
+        for e in bs.find_all('a'):
+            if description in e.text:
+                _, episode_number = e.text.split(':')[0].split()
+        return int(episode_number)
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
