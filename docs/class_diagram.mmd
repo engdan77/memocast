@@ -1,0 +1,24 @@
+classDiagram
+    BasePodcastParser <|-- PythonBytesParser
+    BasePodcastParser <|-- OtherParser
+
+class BasePodcastParser {
+    <<abstract>>
+    +try_all()
+    }
+
+class PythonBytesParser {
+    + base_url
+    + parse() : List[Url]
+    - get_podcast_short_name() : str
+    - get_current_episode_number() : int
+    - get_linked_url_podcast_source(episode_number) : str
+    }
+
+class OtherParser {
+    + base_url
+    + parse() : List[Url]
+    - get_podcast_short_name() : str
+    - get_current_episode_number() : int
+    - get_linked_url_podcast_source(episode_number) : str
+    }
