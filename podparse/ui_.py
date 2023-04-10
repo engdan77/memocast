@@ -1,5 +1,5 @@
 from functools import partial
-from typing import List, Union
+from typing import List, Union, Callable
 from .logging_ import logger
 
 from .io_ import get_device_and_import_modules
@@ -53,6 +53,7 @@ class BasePodView:
 class PythonistaPodView(BasePodView, ui.View):
     tm = 20  # top margin
     vgap = 10  # vertical gap between cells
+    ui = None
 
     def __init__(self, *args, **kwargs):
         ui.View.__init__(self, *args, **kwargs)
@@ -60,6 +61,7 @@ class PythonistaPodView(BasePodView, ui.View):
         self.cells = []
         self.height_cache = self.tm
         self.make_view()
+        self.__class__.ui = self
 
     def make_view(self):
         sv = ui.ScrollView(name='sv')
@@ -86,6 +88,11 @@ class PythonistaPodView(BasePodView, ui.View):
         self.close()
 
     @classmethod
+    def exit_app(cls, *args):
+        cls.ui.close()
+        raise SystemExit('Exiting application')
+
+    @classmethod
     def show(cls, urls: List[Url]):
         w = 600
         h = 800
@@ -93,19 +100,26 @@ class PythonistaPodView(BasePodView, ui.View):
         podcast_view = cls(frame=f, bg_color='white')
 
         for url in urls:
-            cell = UrlRow(width=500, height=40, bg_color='white', url=url)
+            cell = UrlRow(width=1024, height=40, bg_color='white', url=url)
             podcast_view.add_cell(cell)
 
-        btn = ui.Button(name='save', frame=(0, 0, 90, 64))
-        btn.font = ('Arial Rounded MT Bold', 25)
-        btn.title = 'Save'
-        btn.border_width = .9
-        btn.corner_radius = 3
-        btn.background_color = 'blue'
-        btn.tint_color = 'white'
-        btn.action = partial(cls.get_all_enabled, podcast_view)
-        podcast_view.add_cell(btn)
+        save_btn = cls.create_button(callback=partial(cls.get_all_enabled, podcast_view), label='Save')
+        exit_btn = cls.create_button(callback=cls.exit_app, label='Exit')
+        podcast_view.add_cell(save_btn)
+        podcast_view.add_cell(exit_btn)
         podcast_view.present('fullscreen')
+
+    @classmethod
+    def create_button(cls, callback: Callable, label: str):
+        button = ui.Button(name='save', frame=(0, 0, 90, 64))
+        button.font = ('Arial Rounded MT Bold', 25)
+        button.title = label
+        button.border_width = .9
+        button.corner_radius = 3
+        button.background_color = 'blue'
+        button.tint_color = 'white'
+        button.action = callback
+        return button
 
     def get_option(self, options: List[str], title: str = '') -> Union[str, None]:
         option_index = console.alert('', title, *options, hide_cancel_button=False)
