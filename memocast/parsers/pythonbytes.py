@@ -1,7 +1,7 @@
 from typing import Iterable
 from .. import io_
 from bs4 import BeautifulSoup
-from podparse.logging_ import logger
+from memocast.logging_ import logger
 from .. import protocols
 
 from .baseclass import BasePodcastParser

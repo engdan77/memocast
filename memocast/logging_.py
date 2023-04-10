@@ -1,5 +1,5 @@
 import logging
-from podparse import __pkg__
+from memocast import __pkg__
 import builtins
 
 class Logger(object):

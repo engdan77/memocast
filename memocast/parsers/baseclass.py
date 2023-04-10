@@ -1,6 +1,6 @@
 from abc import abstractmethod
 from typing import Iterable
-from podparse import protocols
+from memocast import protocols
 from ..logging_ import logger
 from ..exceptions import ParserException
 

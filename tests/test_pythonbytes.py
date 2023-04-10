@@ -1,6 +1,6 @@
 import pytest
 import requests
-from podparse.parsers.pythonbytes import PythonBytesParser
+from memocast.parsers.pythonbytes import PythonBytesParser
 
 
 @pytest.fixture

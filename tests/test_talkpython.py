@@ -1,6 +1,6 @@
 import pytest
 import requests
-from podparse.parsers.talkpython import TalkPythonToMeParser
+from memocast.parsers.talkpython import TalkPythonToMeParser
 
 
 @pytest.fixture

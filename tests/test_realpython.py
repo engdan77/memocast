@@ -1,6 +1,6 @@
 import pytest
 import requests
-from podparse.parsers.realpython import RealPythonParser
+from memocast.parsers.realpython import RealPythonParser
 
 
 @pytest.fixture

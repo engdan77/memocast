@@ -1,18 +1,18 @@
-from typing import Iterable, Optional
+from typing import Iterable
 from .. import io_
 from bs4 import BeautifulSoup
-from podparse.logging_ import logger
+from memocast.logging_ import logger
 from .. import protocols
 
 from .baseclass import BasePodcastParser
 
 
-class RealPythonParser(BasePodcastParser):
-    base_url = 'https://realpython.com/podcasts/rpp'
+class TalkPythonToMeParser(BasePodcastParser):
+    base_url = 'https://talkpython.fm'
 
     @staticmethod
     def get_podcast_short_name() -> str:
-        return "RealPython"
+        return "TalkPython"
 
     def parse(self) -> Iterable[protocols.Url]:
         """Parse and return iterable Urls"""
@@ -37,24 +37,18 @@ class RealPythonParser(BasePodcastParser):
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
         self.title = bs.find('div', class_='wv3SK').text
-        episode_number = self.get_episode_number_amongst_all(self.title)
-        return episode_number
-
-    def get_episode_number_amongst_all(self, description: str) -> Optional[int]:
-        html = io_.download_html(self.base_url)
-        bs = BeautifulSoup(html, 'html.parser')
-        episode_number = None
-        for e in bs.find_all('a'):
-            if description in e.text:
-                _, episode_number = e.text.split(':')[0].split()
-        return int(episode_number)
+        return int(self.title.split(':')[0].strip('#'))
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
         urls = []
-        for link in bs.find("p", string="Show Links:").fetchNextSiblings('ul')[0].find_all('a'):
-            logger.debug(f'Found URL item {link}')
-            description = link.text
-            url = link.get('href')
-            urls.append(protocols.Url(url, description, self))
+        for bold_item in bs.find_all('b'):
+            logger.debug(f'Found URL item {bold_item}')
+            description = bold_item.text
+            try:
+                url = bold_item.nextSibling.nextSibling.get('href')
+            except AttributeError:
+                logger.debug('Skipping to next ')
+            else:
+                urls.append(protocols.Url(url, description, self))
         return urls

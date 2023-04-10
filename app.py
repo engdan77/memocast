@@ -1,16 +1,16 @@
 from typing import List
 
 import requests.exceptions
-import podparse as info
-from podparse import io_
-from podparse import clipboard_
-import podparse.parsers  # This to import all parsers as subclassed (allow those as plugins)
-import podparse.parsers.baseclass
-from podparse.logging_ import logger
-from podparse.shareios import get_share_url_from_ios
-from podparse.ui_ import view_factory
-from podparse.io_ import get_device_and_import_modules
-from podparse.protocols import DeviceType, Url
+import memocast as info
+from memocast import io_
+from memocast import clipboard_
+import memocast.parsers  # This to import all parsers as subclassed (allow those as plugins)
+import memocast.parsers.baseclass
+from memocast.logging_ import logger
+from memocast.shareios import get_share_url_from_ios
+from memocast.ui_ import view_factory
+from memocast.io_ import get_device_and_import_modules
+from memocast.protocols import DeviceType, Url
 
 logger.setLevel('DEBUG')
 
@@ -42,7 +42,7 @@ def get_duplicate_matched_parsers(links: List[Url]):
 
 def get_links(html):
     try:
-        links = podparse.parsers.baseclass.BasePodcastParser(html).try_all()
+        links = memocast.parsers.baseclass.BasePodcastParser(html).try_all()
     except requests.exceptions.RequestException as e:
         logger.error(f'Error downloading source (forgot copy URL?): {e.args}')
         raise SystemExit()
