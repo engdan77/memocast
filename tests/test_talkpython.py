@@ -3,9 +3,10 @@ import requests
 from memocast.parsers.talkpython import TalkPythonToMeParser
 
 
-@pytest.fixture
-def parser():
-    html = requests.get('https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahcKEwiQh9C4k5f-AhUAAAAAHQAAAAAQCg').content
+@pytest.fixture(params=('https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahcKEwiQh9C4k5f-AhUAAAAAHQAAAAAQCg',
+                        'https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahgKEwigz5KCwJX-AhUAAAAAHQAAAAAQwgk'))
+def parser(request):
+    html = requests.get(request.param).content
     return TalkPythonToMeParser(html.decode())
 
 
