@@ -13,9 +13,18 @@ Wouldn't be nice if there was an easier way select which of those you found inte
 
 
 
-## How does it work?
+## How to use
+
+Once you've listened to your podcast using Google podcaster you click "share" and run this within Pythonista.
+This will allow you select the links you wish to add to your Reminders app for later use.
 
 
+
+## Currently supported podcast parsers
+
+- [PythonBytes](https://pythonbytes.fm/)
+- [Talk Python To Me](https://talkpython.fm/)
+- [Real Python](https://realpython.com/podcasts/)
 
 
 
@@ -28,6 +37,8 @@ Either click on this link or aim your camera at the below QR-code to have it dow
 
 
 ## How to develop additional podcast parser
+
+### Create the code
 
 All that is needed need to do is to create a new python file within the parsers package...
 
@@ -81,15 +92,66 @@ class OtherParser(BasePodcastParser):
 
 By adding this module it will work as a plugin and allow the application to use this to attempt parsing.
 
+### Test your code
+
+To manually test your parser you can also do that using your regular working environment (MacOS/Windows/Linux) by copying the URL to your clipboard since it use this as fallback. Currently the user interface and "Reminders" is only support by iOS the application will exit before then - but for most cases enough to test your parser.
+
+As with good best practice you may consider creating unit tests ([pytest](https://docs.pytest.org/)) within the `tests` folder.
+
+### My development workflow
+
+What I did discover and made the development experience so smooth is the fact that as long as you have a Mac with a [silicon processor](https://support.apple.com/en-us/HT211814) you are apple to install and run Pythonista as [iOS app within MacOS](https://developer.apple.com/documentation/apple-silicon/running-your-ios-apps-in-macos).
+
+So what I did was to create a within the *Pythonista* folder in [iCloud drive](https://support.apple.com/guide/iphone/set-up-icloud-drive-iphbbcf8827d/ios), and then I also assured I had this folder under version control using a git-repository and using the iOS app [Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807) as git client on the devices.
+
+Now this iCloud folder that you can have kept synced with your MacOS is found available within
+`Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents`
+so that way you can access it either from your favorite IDE on your Mac or from Pythonista from you iOS devices.
+
 
 
 ## Software design
 
-Essentially ...
+### Sequence flowchart
+
+Essentially in sequence the application does ..
+
+- Get URL for the Google podcast
+- The `BasePodCastParser` sequentially test all parsers
+  - If multiple parsers matching give user a choice to select correct
+- The list of all links (URLs) with descriptions displayed to user for selection
+- Selected links stored to iOS Reminders
+
+```mermaid
+flowchart LR
+    subgraph get_url [Get Google URL]
+        direction LR
+        ios_share --> get_html_source
+        clipboard --> get_html_source
+    end
+    
+    subgraph process [Get podcast homepage and parse]
+        get_html_source --> get_links
+        get_links -- ".try_all()" --> PodCastParser(BasePodCastParser)
+        PodCastParser --Urls--> get_links
+        style PodCastParser fill:#bbf
+    end
+
+    subgraph select [Display & Select links]
+        get_links -- Urls --> PythonistaPodView 
+        style PythonistaPodView fill:#bbf    
+    end
+
+    subgraph save [Save to Reminders]
+        PythonistaPodView -- Urls --> Reminders[(iOS Reminders)]
+    end
+```
 
 
 
 ### Class diagram for parsers
+
+For further development this is the the only class of relevance to extend with additional parsers
 
 ```mermaid
 classDiagram
@@ -119,3 +181,12 @@ class OtherParser {
 
 ```
 
+
+
+## Credits to .. 
+
+- Developers of [Pythonista](http://omz-software.com/pythonista/)
+- [JeRequests](https://pypi.org/project/requests/)
+- [Beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+- Hosts of [PythonBytes](https://talkpython.fm/), [Talk Python To Me](https://talkpython.fm/) and [RealPython](https://realpython.com/podcasts/)
+- Jetbrains for remarkable [PyCharm](https://www.jetbrains.com/pycharm/)
