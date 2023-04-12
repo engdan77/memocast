@@ -74,5 +74,6 @@ def main():
     except requests.exceptions.RequestException as e:
         logger.error(f'Unable to parse URL: {e.args}')
 
+
 if __name__ == '__main__':
     main()

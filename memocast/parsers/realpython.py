@@ -23,10 +23,6 @@ class RealPythonParser(BasePodcastParser):
         urls = self.get_all_urls_from_podcast_html(episode_source_html)
         return urls
 
-    def get_urls_from_html(self) -> Iterable[protocols.Url]:
-        """Get URLS from page"""
-        return []
-
     def get_linked_url_podcast_source(self, episode_number) -> str:
         """Get source URL based on episode in podcast page"""
         return f'{self.__class__.base_url}/{episode_number}'

@@ -2,7 +2,6 @@ from abc import abstractmethod
 from typing import Iterable
 from memocast import protocols
 from ..logging_ import logger
-from ..exceptions import ParserException
 
 
 class BasePodcastParser:
@@ -37,11 +36,6 @@ class BasePodcastParser:
     @abstractmethod
     def parse(self) -> Iterable[protocols.Url]:
         """Parse and return iterable Urls"""
-        ...
-
-    @abstractmethod
-    def get_linked_url_podcast_source(self, episode_number) -> str:
-        """Get source URL based on episode in podcast page"""
         ...
 
     @abstractmethod
