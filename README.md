@@ -4,23 +4,24 @@ A small [iOS](https://en.wikipedia.org/wiki/IOS) app for e.g. iPhone that allow 
 
 ## Motivation 🤔
 
-Imagine that you just as I often do listening to a podcast such as [PythonBytes](https://podcasts.google.com/feed/aHR0cHM6Ly9weXRob25ieXRlcy5mbS9lcGlzb2Rlcy9yc3M/episode/NTI2OTQ0YjEtNDhjZS00OTllLWE3YTAtZThiZWU2MzdlMTMy?sa=X&ved=0CAwQz4EHahcKEwjgm5v-qov-AhUAAAAAHQAAAAAQCg) (a fantastic one btw) using [Google Podcast](https://podcasts.google.com/) while out walking and hear a talk about an interesting project or article you wish to read more about when time allow.
-Thankfully the referenced links are added to the show notes of the talk, but it means you would need to look it up and add this into your own notes.
+Imagine that you just as I often do listening to a podcast such as [PythonBytes](https://podcasts.google.com/feed/aHR0cHM6Ly9weXRob25ieXRlcy5mbS9lcGlzb2Rlcy9yc3M/episode/NTI2OTQ0YjEtNDhjZS00OTllLWE3YTAtZThiZWU2MzdlMTMy?sa=X&ved=0CAwQz4EHahcKEwjgm5v-qov-AhUAAAAAHQAAAAAQCg) (a fantastic one btw) using [Google Podcast](https://podcasts.google.com/) while out walking and hear a talk about an interesting project or article you wish to read more about when time allow. 
 
-Wouldn't be nice if there was an easier way select which of those you found interesting and have them added to reminders on your phone while you'd still out walking without the need to lose too much focus on where you put your feets..?
+Thankfully the referenced links are added to the show notes of the talk, but it means you would usually need to look it up on the podcasts main page and add this into your own personal notes, and using the phone to *copy-and-paste* is found tedious.
 
-... if you do recognise the same, then this small application might be what you're looking for.
+Wouldn't be nice if there was an easier way select which of those you found interesting and have them added to reminders on your phone while you'd still out walking without the need to lose too much of your focus on where you put your feets..?
+
+... if you also see this as a problem and wished there were a better way, then this small app might be what you're searching for.
 
 
 
-## How to use 👨🏼‍🏫
+## How to use 👨🏼‍🏫📱
 
 Once you've listened to your podcast using Google podcaster you click "share" and run this within Pythonista.
 This will allow you select the links you wish to add to your Reminders app for later use.
 
 
 
-## Currently supported podcasts
+## Currently supported podcasts 🎧
 
 So currently the following podcasts are currently supported by the parsers that does the work of finding links and allow one to add to your reminders, but easily extended in the futurue ... see further down how ...
 
@@ -30,7 +31,7 @@ So currently the following podcasts are currently supported by the parsers that 
 
 
 
-## Requirements and installation
+## Requirements and installation ✓
 
 To allow Python to run within your device you will need to first to install [Pythonista 3](https://apps.apple.com/us/app/pythonista-3/id1085978097) from app store that by the time writing this costs $9.99 which to my opinion is a very small price for such useful addition to your device.
 
