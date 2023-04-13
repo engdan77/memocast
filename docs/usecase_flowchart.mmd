@@ -1,0 +1,22 @@
+flowchart LR
+    subgraph get_url [Get Google URL]
+        direction LR
+        ios_share --> get_html_source
+        clipboard --> get_html_source
+    end
+    
+    subgraph process [Get podcast homepage and parse]
+        get_html_source --> get_links
+        get_links -- ".try_all()" --> PodCastParser(BasePodCastParser)
+        PodCastParser --Urls--> get_links
+        style PodCastParser fill:#bbf
+    end
+
+    subgraph select [Display & Select links]
+        get_links -- Urls --> PythonistaPodView 
+        style PythonistaPodView fill:#bbf    
+    end
+
+    subgraph save [Save to Reminders]
+        PythonistaPodView -- Urls --> Reminders[(iOS Reminders)]
+    end
