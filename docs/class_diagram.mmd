@@ -1,6 +1,9 @@
 classDiagram
     BasePodcastParser <|-- PythonBytesParser
     BasePodcastParser <|-- OtherParser
+    BasePodView <|-- PythonistaPodView
+    main <-- PythonistaPodView
+    main <-- BasePodcastParser
 
 class BasePodcastParser {
     <<abstract>>
@@ -9,16 +12,29 @@ class BasePodcastParser {
 
 class PythonBytesParser {
     + base_url
-    + parse() : List[Url]
     - get_podcast_short_name() : str
     - get_current_episode_number() : int
-    - get_linked_url_podcast_source(episode_number) : str
+    + parse() : List[Url]
     }
 
 class OtherParser {
     + base_url
-    + parse() : List[Url]
     - get_podcast_short_name() : str
     - get_current_episode_number() : int
-    - get_linked_url_podcast_source(episode_number) : str
+    + parse() : List[Url]
     }
+
+class BasePodView {
+    <<abstract>>
+    +show(urls: List[Url])
+    add_urls_to_reminder(urls: List[Url])
+    get_option(self, options: List[str], title='')
+}
+
+class PythonistaPodView {
+    ...
+}
+
+class main {
+    ...
+}
