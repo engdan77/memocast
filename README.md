@@ -107,7 +107,7 @@ As with good best practice you may consider creating unit tests ([pytest](https:
 
 My past experience developing apps for iOS using Python have been that it have added a lot of overhead using framework such as [Kivy](https://kivy.org/) that have involved setting up certain tool chain including XCode and required one to compile such into an [.ipa](https://en.wikipedia.org/wiki/.ipa) file that also required a complex procedure for signing and/or apply other strategy to allow other users to take advantage of your app that often came with a price (at least at that time). But such project were eventually made such as [this](https://github.com/engdan77/otis_app) one.
 
-When I stumbled on Pythonista 3 it crossed me how easy it was to get an "app" running with minimal efforts and does expose the most relevant iOS API's such as accessing part of it you wouldn't easily do using other frameworks and it does have a rich set of packages included from start such as those found [here](https://omz-software.com/pythonista/docs/ios/index.html) which is quite astonishing. And have yet only started to scratch the surface.
+When I stumbled on Pythonista 3 it crossed me how easy it was to get an "app" running with minimal efforts and does expose the most relevant iOS API's such as accessing part of it you wouldn't easily do using other frameworks and it does have a rich set of packages included from start such as those found [here](https://omz-software.com/pythonista/docs/ios/index.html) which is quite astonishing. And have yet only started to scratch the surface. 😀👍
 
 And all that is needed is to share your Python code that also could be done sharing as an URL (at least small scripts) that makes it relatively easy to share your project.
 
@@ -121,7 +121,7 @@ Now this iCloud folder that you can have kept synced with your MacOS is found av
 `Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents`
 so that way you can access it either from your favorite IDE on your Mac or from Pythonista from you iOS devices.
 
-For me at least this satisifed my main needs...
+For me at least this satisifed my main needs... 🙌
 
 ## Software design
 
@@ -139,8 +139,8 @@ Essentially in sequence the application does ..
 flowchart LR
     subgraph get_url [Get Google URL]
         direction LR
-        ios_share --> get_html_source
-        clipboard --> get_html_source
+        ios_share -.-> get_html_source
+        clipboard -.-> get_html_source
     end
     
     subgraph process [Get podcast homepage and parse]
@@ -148,6 +148,11 @@ flowchart LR
         get_links -- ".try_all()" --> PodCastParser(BasePodCastParser)
         PodCastParser --Urls--> get_links
         style PodCastParser fill:#bbf
+    end
+
+    subgraph podcast [External]
+        external_podcast_page -.-> PodCastParser
+
     end
 
     subgraph select [Display & Select links]
@@ -171,8 +176,8 @@ classDiagram
     BasePodcastParser <|-- PythonBytesParser
     BasePodcastParser <|-- OtherParser
     BasePodView <|-- PythonistaPodView
-    main <-- PythonistaPodView
-    main <-- BasePodcastParser
+    main ..> PythonistaPodView : depends
+    main ..> BasePodcastParser : depends
 
 class BasePodcastParser {
     <<abstract>>
@@ -213,8 +218,7 @@ class main {
 
 ## ✨ Credits goes to ..
 
-- Developers of [Pythonista](http://omz-software.com/pythonista/)
-- [JeRequests](https://pypi.org/project/requests/)
-- [Beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
-- Hosts of [PythonBytes](https://talkpython.fm/), [Talk Python To Me](https://talkpython.fm/) and [RealPython](https://realpython.com/podcasts/)
+- Developers of [Pythonista](http://omz-software.com/pythonista/) for such great app making life easiers
+- Maintainers of [Requests](https://pypi.org/project/requests/), [Beautifulsoup4](https://pypi.org/project/beautifulsoup4/) making this app possible
+- Hosts of [PythonBytes](https://talkpython.fm/), [Talk Python To Me](https://talkpython.fm/) and [RealPython](https://realpython.com/podcasts/) for fantastic talks
 - Jetbrains for remarkable [PyCharm](https://www.jetbrains.com/pycharm/)
