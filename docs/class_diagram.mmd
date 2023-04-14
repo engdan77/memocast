@@ -2,8 +2,8 @@ classDiagram
     BasePodcastParser <|-- PythonBytesParser
     BasePodcastParser <|-- OtherParser
     BasePodView <|-- PythonistaPodView
-    main <-- PythonistaPodView
-    main <-- BasePodcastParser
+    main ..> PythonistaPodView : depends
+    main ..> BasePodcastParser : depends
 
 class BasePodcastParser {
     <<abstract>>
