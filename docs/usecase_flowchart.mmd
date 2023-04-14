@@ -1,8 +1,8 @@
 flowchart LR
     subgraph get_url [Get Google URL]
         direction LR
-        ios_share --> get_html_source
-        clipboard --> get_html_source
+        ios_share -.-> get_html_source
+        clipboard -.-> get_html_source
     end
     
     subgraph process [Get podcast homepage and parse]
@@ -10,6 +10,11 @@ flowchart LR
         get_links -- ".try_all()" --> PodCastParser(BasePodCastParser)
         PodCastParser --Urls--> get_links
         style PodCastParser fill:#bbf
+    end
+
+    subgraph podcast [External]
+        external_podcast_page -.-> PodCastParser
+
     end
 
     subgraph select [Display & Select links]
