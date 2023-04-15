@@ -9,6 +9,7 @@ else:
 
 class UrlRow(ui.View):
     def __init__(self, width=200, height=40, bg_color='white', url=None):
+        """This is the widget responsible for generating row based in link"""
         self.set_attrs(width=width, height=height, bg_color=bg_color)
         self.url = url
         self.text = url.description
