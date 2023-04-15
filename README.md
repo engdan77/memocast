@@ -39,8 +39,11 @@ Step 2) Either click on [this](pythonista3://?exec=from%20urllib.request%20impor
 <img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/qr_install_memocast.png" alt="qr_install_memocast" width=300/>
 
 Step 3) Click **<u>Run</u>** in the upper right corner.
+
 Step 4) Open up Pyhonista ➡ Script Library ➡ This Phone ➡ memocast-master ➡ app.py
+
 Step 5) Click on the wrench 🔧 in the upper right
+
 Step 6) ....
 
 
