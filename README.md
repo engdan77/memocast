@@ -36,7 +36,7 @@ So currently the following podcasts are currently supported by the parsers that 
 Step 1) Install [Pythonista 3](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjPwrakjKz-AhXis4sKHXEqAwgQFnoECCAQAQ&url=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fpythonista-3%2Fid1085978097&usg=AOvVaw3bRq2p9kAOLiy2adnnJViz) from app store
 Step 2) Either click on [this](pythonista3://?exec=from%20urllib.request%20import%20urlopen%0Afrom%20pathlib%20import%20Path%0Aimport%20zipfile%0Aurl%20%3D%20%22https://github.com/engdan77/memocast/archive/refs/heads/master.zip%22%0Azipf%20%3D%20%22memocast.zip%22%0Awith%20urlopen%28url%29%20as%20file:%0A%20%20%20%20content%20%3D%20file.read%28%29%0Awith%20open%28zipf,%20%27wb%27%29%20as%20dl:%0A%20%20%20%20dl.write%28content%29%0Awith%20zipfile.ZipFile%28zipf,%20%22r%22%29%20as%20zipr:%0A%20%20%20%20zipr.extractall%28%22.%22%29%0APath%28zipf%29.unlink%28%29%0A) link from you iPhone/iPad or aim your camera at the below **QR-code** and open this link.
 
-<img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/qr_install_memocast.png" alt="qr_install_memocast" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/qr_install_memocast.png" alt="qr_install_memocast" style="zoom:25%;" />
 
 Step 3) Click **<u>Run</u>** in the upper right corner.
 Step 4) Open up Pyhonista ➡ Script Library ➡ This Phone ➡ memocast-master ➡ app.py
