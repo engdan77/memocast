@@ -16,8 +16,9 @@ Wouldn't be nice if there was an easier way select which of those you found inte
 
 ## How to use 👨🏼‍🏫📱
 
-Once you've listened to your podcast using Google podcaster you click "share" and run this within Pythonista.
-This will allow you select the links you wish to add to your Reminders app for later use.
+|                                                              |                                               |
+| ------------------------------------------------------------ | --------------------------------------------- |
+| Once you've listened to your podcast using Google podcaster you click "share" and "Run Pythonista script"<br/>You will then have a MemoCast icon, click this and it will allow you select the links you wish to add to your Reminders app for later use. | ![usage](/Users/edo/Desktop/python/usage.gif) |
 
 
 
@@ -37,7 +38,7 @@ So currently the following podcasts are currently supported by the parsers that 
 
 **Step 2)** Either click on [this](pythonista3://?exec=from%20urllib.request%20import%20urlopen%0Afrom%20pathlib%20import%20Path%0Aimport%20zipfile%0Aurl%20%3D%20%22https://github.com/engdan77/memocast/archive/refs/heads/master.zip%22%0Azipf%20%3D%20%22memocast.zip%22%0Awith%20urlopen%28url%29%20as%20file:%0A%20%20%20%20content%20%3D%20file.read%28%29%0Awith%20open%28zipf,%20%27wb%27%29%20as%20dl:%0A%20%20%20%20dl.write%28content%29%0Awith%20zipfile.ZipFile%28zipf,%20%22r%22%29%20as%20zipr:%0A%20%20%20%20zipr.extractall%28%22.%22%29%0APath%28zipf%29.unlink%28%29%0A) link from you iPhone/iPad or aim your camera at the below **QR-code** and open this link.
 
-<img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/qr_install_memocast.png" alt="qr_install_memocast" width=300/>
+<img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/qr_install_memocast.png" alt="qr_install_memocast" height=300/><img src="https://raw.githubusercontent.com/engdan77/project_images/master/pics/install_procedure.gif" alt="install_procedure" height=300 />  
 
 **Step 3)** Click **<u>Run</u>** in the upper right corner.
 
@@ -46,8 +47,6 @@ So currently the following podcasts are currently supported by the parsers that 
 **Step 5)** Click on the wrench 🔧 in the upper right ➡ Shortcuts ➡ Share Extension ➡ Click on **+** icon
 
 **Step 6)** Change custom title to "MemoCast" ➡ click **<u>Add</u>**
-
-
 
 
 
@@ -226,7 +225,9 @@ class main {
 }
 ```
 
+## Contributions 🫶
 
+This is a project in a very early stage and any contributions are more than welcome by submitting [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) for the repository https://github.com/engdan77/memocast since it may still have some rough edges. And new "parsers" (see above) is found valuable.
 
 ## ✨ Credits goes to ..
 
