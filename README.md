@@ -16,9 +16,9 @@ Wouldn't be nice if there was an easier way select which of those you found inte
 
 ## How to use 👨🏼‍🏫📱
 
-|                                                              |                                               |
-| ------------------------------------------------------------ | --------------------------------------------- |
-| Once you've listened to your podcast using Google podcaster you click "share" and "Run Pythonista script"<br/>You will then have a MemoCast icon, click this and it will allow you select the links you wish to add to your Reminders app for later use. | ![usage](/Users/edo/Desktop/python/usage.gif) |
+|                                                              |                                                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Once you've listened to your podcast using Google podcaster you click "share" and "Run Pythonista script"<br/>You will then have a MemoCast icon, click this and it will allow you select the links you wish to add to your Reminders app for later use. | ![usage](https://raw.githubusercontent.com/engdan77/project_images/master/pics/usage.gif) |
 
 
 
