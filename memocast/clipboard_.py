@@ -47,5 +47,5 @@ def get_clipboard_instance():
     if device == DeviceType.ios:
         return IosClipboard()
     if device == DeviceType.other:
-        return MockClipboard()
+        return OtherClipboard()  # Will use clipboard instead
     assert False, "No valid device identified"
