@@ -27,6 +27,7 @@ class BasePodcastParser:
                 continue
             logger.debug(f'Found {len(list(subparser_urls))} links')
             links.extend(subparser_urls)
+        links = [_ for _ in links if _.description]  # Removes unwanted blank descriptions
         logger.debug(f'Found total {len(links)} using {class_shortname}')
         return links
 
