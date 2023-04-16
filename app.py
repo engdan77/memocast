@@ -20,7 +20,7 @@ def process_podcast():
     html = get_html_source()
     links = get_links(html)
     parsers_matching = get_duplicate_matched_parsers(links)
-    logger.debug(f"Duplicate parsers: {parsers_matching}")
+    logger.debug(f"Found matching parsers: {parsers_matching}")
     assert (
         get_device_and_import_modules() == DeviceType.ios
     ), "This is not an IOS device, exiting"
