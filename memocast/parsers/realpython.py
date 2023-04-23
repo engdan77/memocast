@@ -48,9 +48,12 @@ class RealPythonParser(BasePodcastParser):
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
         urls = []
-        for link in bs.find("p", string="Show Links:").fetchNextSiblings('ul')[0].find_all('a'):
-            logger.debug(f'Found URL item {link}')
-            description = link.text
-            url = link.get('href')
-            urls.append(protocols.Url(url, description, self))
+        for subject in ('Show Links:', 'Projects:', 'Additional Links:'):
+            if not bs.find("p", string=subject):
+                continue
+            for link in bs.find("p", string=subject).fetchNextSiblings('ul')[0].find_all('a'):
+                logger.debug(f'Found URL item {link}')
+                description = link.text
+                url = link.get('href')
+                urls.append(protocols.Url(url, description, self))
         return urls
