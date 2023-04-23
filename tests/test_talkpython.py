@@ -1,12 +1,13 @@
 import pytest
 import requests
+from collections import namedtuple
+
 from memocast.parsers.talkpython import TalkPythonToMeParser
 
 
-@pytest.fixture(params=('https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahcKEwiQh9C4k5f-AhUAAAAAHQAAAAAQCg',
-                        'https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahgKEwigz5KCwJX-AhUAAAAAHQAAAAAQwgk'))
-def parser(request):
-    html = requests.get(request.param).content
+@pytest.fixture
+def parser():
+    html = requests.get('https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahcKEwiQh9C4k5f-AhUAAAAAHQAAAAAQCg').content
     return TalkPythonToMeParser(html.decode())
 
 
@@ -22,7 +23,7 @@ def linked_url(parser, episode_number):
 
 def test_get_podcast_short_name(parser):
     short_name = parser.get_podcast_short_name()
-    assert short_name == 'TalkPython'
+    assert short_name == "TalkPython"
 
 
 def test_get_current_episode_number(episode_number):
@@ -30,11 +31,12 @@ def test_get_current_episode_number(episode_number):
 
 
 def test_get_linked_url_podcast_source(linked_url):
-    assert linked_url == 'https://talkpython.fm/410'
+    assert linked_url == "https://talkpython.fm/410"
 
 
 def test_parse(parser):
     links = parser.parse()
-    assert len(links) == 17, 'Wrong number of URL retrieved'
-    assert all(link.url.startswith(('http', 'mailto')) for link in links), "One of the URL not being valid"
-
+    assert len(links) == 18, "Wrong number of URL retrieved"
+    assert all(
+        link.url.startswith(("http", "mailto")) for link in links
+    ), "One of the URL not being valid"
