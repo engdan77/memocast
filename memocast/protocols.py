@@ -1,5 +1,8 @@
 from enum import Enum
-from .dataclasses_ import dataclass
+try:
+    from dataclasses import dataclass
+except ImportError:
+    from .dataclasses_ import dataclass  # For earlier Python3
 
 
 @dataclass
