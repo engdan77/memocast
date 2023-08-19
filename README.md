@@ -1,6 +1,6 @@
 # Memocast 📻 ✅
 
-A small [iOS](https://en.wikipedia.org/wiki/IOS) app for e.g. iPhone that allow you to add links heard in podcasts into [reminders](https://en.wikipedia.org/wiki/Reminders_(Apple)).
+An [iOS](https://en.wikipedia.org/wiki/IOS) app *(or script perhaps better term)* for e.g. iPhone that allow you to add links heard in podcasts into [reminders](https://en.wikipedia.org/wiki/Reminders_(Apple)).
 
 ## Motivation 🤔
 
@@ -11,8 +11,6 @@ Thankfully the referenced links are added to the show notes of the talk, but it 
 Wouldn't it be nice if there was an easier way select which of those you found interesting and have them added to reminders on your phone while you'd still out walking without the need to lose too much of your focus on where you put your feets..?
 
 ... if you also see this as a problem and wished there were a better way, then this small app might be what you're searching for.
-
-
 
 ## How to use 👨🏼‍🏫📱
 
@@ -30,7 +28,9 @@ So currently the following podcasts are currently supported by the parsers that 
 - [Talk Python To Me](https://talkpython.fm/)
 - [Real Python](https://realpython.com/podcasts/)
 
+## Project highlighted ⭐️
 
+If you wish to listen or see discussion around this project you may in interessted visiting [PythonBytes #338: Scripting iOS with Python](https://pythonbytes.fm/episodes/show/338/scripting-ios-with-python) and [Real Python - episode 160](https://realpython.com/podcasts/rpp/160/)
 
 ## Installation ✓
 
@@ -111,8 +111,6 @@ By adding this module it will work as a *<u>plugin</u>* and will automatically b
 To manually test your parser you can also do that using your regular working environment (MacOS/Windows/Linux) by copying the URL to your clipboard since it use this as fallback. Currently the user interface and "Reminders" is only support by iOS the application will exit before then - but for most cases enough to test your parser.
 
 As with good best practice you may consider creating unit tests ([pytest](https://docs.pytest.org/)) within the `tests` folder.
-
-
 
 ## My development workflow and reflections using Pythonista 👨🏼‍💻
 
@@ -233,5 +231,5 @@ This is a project in a very early stage and any contributions are more than welc
 
 - Developers of [Pythonista](http://omz-software.com/pythonista/) for such great app making life easiers
 - Maintainers of [Requests](https://pypi.org/project/requests/), [Beautifulsoup4](https://pypi.org/project/beautifulsoup4/) making this app possible
-- Hosts of [PythonBytes](https://talkpython.fm/), [Talk Python To Me](https://talkpython.fm/) and [RealPython](https://realpython.com/podcasts/) for fantastic talks
+- Hosts of [PythonBytes](https://talkpython.fm/) (Michael Kennedy and Brian Okken), [Talk Python To Me](https://talkpython.fm/) (Michael Kennedy) and [RealPython](https://realpython.com/podcasts/) (Christopher Bailey) for fantastic talks
 - Jetbrains for remarkable [PyCharm](https://www.jetbrains.com/pycharm/)
