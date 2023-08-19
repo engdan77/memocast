@@ -30,7 +30,7 @@ So currently the following podcasts are currently supported by the parsers that 
 
 ## Project highlighted ⭐️
 
-If you wish to listen or see discussion around this project you may in interessted visiting [PythonBytes #338: Scripting iOS with Python](https://pythonbytes.fm/episodes/show/338/scripting-ios-with-python) and [Real Python - episode 160](https://realpython.com/podcasts/rpp/160/)
+If you wish to listen or see discussion around this project you may in interessted visiting [PythonBytes #338: Scripting iOS with Python](https://pythonbytes.fm/episodes/show/338/scripting-ios-with-python) *(at 18:20)* and [Real Python - episode 160](https://realpython.com/podcasts/rpp/160/) *(at 43:20)*
 
 ## Installation ✓
 
