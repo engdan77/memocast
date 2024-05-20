@@ -1,0 +1,4 @@
+requests
+pytest==7.4.4
+bs4
+pytest-lazy-fixture
