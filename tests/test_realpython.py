@@ -12,12 +12,12 @@ test_params = (
     test_case(
         11,
         153,
-        "https://podcasts.google.com/feed/aHR0cHM6Ly9yZWFscHl0aG9uLmNvbS9wb2RjYXN0cy9ycHAvZmVlZA/episode/YWU3MDAxNjgtNjQ5MC00YzZkLWJjNTMtOWVlMzNmMWI2YmI4?sa=X&ved=0CAUQkfYCahcKEwi45-Cslr3-AhUAAAAAHQAAAAAQPw",
+        "https://pca.st/episode/a363615d-633c-44f4-ad58-abce82862393",
     ),
     test_case(
         16,
         148,
-        "https://podcasts.google.com/feed/aHR0cHM6Ly9yZWFscHl0aG9uLmNvbS9wb2RjYXN0cy9ycHAvZmVlZA/episode/NTBmZjQzZjItMTMzZC00NzE2LWIyYTgtOGFlYjQ0Y2JhMGFl?sa=X&ved=0CAUQkfYCahcKEwi45-Cslr3-AhUAAAAAHQAAAAAQPw",
+        "https://pca.st/episode/43682a9e-a7a8-4021-9da5-0734ab49eb0c",
     ),
 )
 

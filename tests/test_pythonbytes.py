@@ -5,7 +5,7 @@ from memocast.parsers.pythonbytes import PythonBytesParser
 
 @pytest.fixture
 def parser():
-    html = requests.get('https://podcasts.google.com/feed/aHR0cHM6Ly9weXRob25ieXRlcy5mbS9lcGlzb2Rlcy9yc3M/episode/NTI2OTQ0YjEtNDhjZS00OTllLWE3YTAtZThiZWU2MzdlMTMy?sa=X&ved=0CAUQkfYCahcKEwigz5KCwJX-AhUAAAAAHQAAAAAQAQ').content
+    html = requests.get('https://pca.st/episode/815d5c9f-9cc6-4f47-be31-79ffdda9cd4e').content
     return PythonBytesParser(html.decode())
 
 

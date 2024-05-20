@@ -7,7 +7,7 @@ from memocast.parsers.talkpython import TalkPythonToMeParser
 
 @pytest.fixture
 def parser():
-    html = requests.get('https://podcasts.google.com/feed/aHR0cHM6Ly90YWxrcHl0aG9uLmZtL2VwaXNvZGVzL3Jzcw/episode/MjkxNDM0NjktYjQzZC00Mjk4LWFjNTMtZjhmMWE3OTIxMzdk?sa=X&ved=0CAwQz4EHahcKEwiQh9C4k5f-AhUAAAAAHQAAAAAQCg').content
+    html = requests.get('https://pca.st/episode/648d2a6b-ba67-48f0-9a77-177ef4d84fde').content
     return TalkPythonToMeParser(html.decode())
 
 
