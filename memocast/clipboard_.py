@@ -23,8 +23,11 @@ class BaseClipboard(ABC):
 class IosClipboard(BaseClipboard):
     def _get(self) -> str:
         import clipboard
-
-        return clipboard.get()
+        import appex
+        url = clipboard.get()
+        if not url:
+            url = appex.get_url()
+        return url
 
 
 class MockClipboard(BaseClipboard):
