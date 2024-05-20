@@ -4,7 +4,7 @@ An [iOS](https://en.wikipedia.org/wiki/IOS) app *(or script perhaps better term)
 
 ## Motivation 🤔
 
-Imagine that you just as I often do listening to a podcast such as [PythonBytes](https://podcasts.google.com/feed/aHR0cHM6Ly9weXRob25ieXRlcy5mbS9lcGlzb2Rlcy9yc3M/episode/NTI2OTQ0YjEtNDhjZS00OTllLWE3YTAtZThiZWU2MzdlMTMy?sa=X&ved=0CAwQz4EHahcKEwjgm5v-qov-AhUAAAAAHQAAAAAQCg) *(a fantastic one btw)* using [Google Podcast](https://podcasts.google.com/) while out walking and hear a talk about an interesting project or article you wish to read more about when time allow. 
+Imagine that you just as I often do listening to a podcast such as [PythonBytes](https://podcasts.google.com/feed/aHR0cHM6Ly9weXRob25ieXRlcy5mbS9lcGlzb2Rlcy9yc3M/episode/NTI2OTQ0YjEtNDhjZS00OTllLWE3YTAtZThiZWU2MzdlMTMy?sa=X&ved=0CAwQz4EHahcKEwjgm5v-qov-AhUAAAAAHQAAAAAQCg) *(a fantastic one btw)* using [Pocket Casts](https://pocketcasts.com) while out walking and hear a talk about an interesting project or article you wish to read more about when time allow. 
 
 Thankfully the referenced links are added to the show notes of the talk, but it means you would usually need to look it up on the podcasts main page and add this into your own personal notes, and using the phone to *copy-and-paste* is found tedious.
 
@@ -27,6 +27,10 @@ So currently the following podcasts are currently supported by the parsers that 
 - [PythonBytes](https://pythonbytes.fm/)
 - [Talk Python To Me](https://talkpython.fm/)
 - [Real Python](https://realpython.com/podcasts/)
+
+## Releases 💾
+
+The initial **Memocast** <= **1.0.0** were relying on **Google Podcast**, but since the [turndown](https://blog.youtube/news-and-events/podcast-destination-on-youtube-music/) 🪦 **2024** the future releases instead suppors same method but you share from  **[Pocket Casts](https://pocketcasts.com)** instead.
 
 ## Project highlighted ⭐️
 
@@ -138,7 +142,7 @@ For me at least this satisifed my main needs... 🙌
 
 Essentially in sequence the application does ..
 
-- Get URL for the Google podcast
+- Get URL for the Pocket Casts
 - The `BasePodCastParser` sequentially test all parsers
   - If multiple parsers matching give user a choice to select correct
 - The list of all links (URLs) with descriptions displayed to user for selection
@@ -146,7 +150,7 @@ Essentially in sequence the application does ..
 
 ```mermaid
 flowchart LR
-    subgraph get_url [Get Google URL]
+    subgraph get_url [Get Pockets Casts URL]
         direction LR
         ios_share -.-> get_html_source
         clipboard -.-> get_html_source
