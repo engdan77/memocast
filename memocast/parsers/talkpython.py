@@ -1,3 +1,4 @@
+import re
 from typing import Iterable
 from .. import io_
 from bs4 import BeautifulSoup
@@ -32,8 +33,10 @@ class TalkPythonToMeParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        self.title = bs.find('div', class_='wv3SK').text
-        return int(self.title.split(':')[0].strip('#'))
+        episode_number = bs.find('a', class_='download-button').attrs['href'].split('/').pop(-2)
+        title = bs.find('div', class_='section').find('h1').text.strip('#\n ')
+        self.title = f'#{episode_number} {title}'
+        return int(episode_number)
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')
