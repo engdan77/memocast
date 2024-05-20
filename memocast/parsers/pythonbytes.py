@@ -32,8 +32,9 @@ class PythonBytesParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        self.title = bs.find('div', class_='wv3SK').text
-        return int(self.title.split(' ')[0].strip('#'))
+        episode_number, title = bs.find('div', class_='section').find('h1').text.strip('#\n ').split(':')
+        self.title = f'#{episode_number} {title}'
+        return int(episode_number)
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
         bs = BeautifulSoup(episode_source_html, 'html.parser')

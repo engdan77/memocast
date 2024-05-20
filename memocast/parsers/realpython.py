@@ -1,3 +1,4 @@
+import re
 from typing import Iterable, Optional
 from .. import io_
 from bs4 import BeautifulSoup
@@ -32,9 +33,10 @@ class RealPythonParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        self.title = bs.find('div', class_='wv3SK').text
-        episode_number = self.get_episode_number_amongst_all(self.title)
-        return episode_number
+        episode_number = re.match('.+_E(\d+)_.*', bs.find('a', class_='download-button').attrs['href']).group(1)
+        title = bs.find('div', class_='section').find('h1').text.strip('#\n ')
+        self.title = f'#{episode_number} {title}'
+        return int(episode_number)
 
     def get_episode_number_amongst_all(self, description: str) -> Optional[int]:
         html = io_.download_html(self.base_url)
