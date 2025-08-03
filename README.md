@@ -32,6 +32,9 @@ So currently the following podcasts are currently supported by the parsers that 
 
 The initial **Memocast** <= **1.0.0** were relying on **Google Podcast**, but since the [turndown](https://blog.youtube/news-and-events/podcast-destination-on-youtube-music/) 🪦 **2024** the future releases instead suppors same method but you share from  **[Pocket Casts](https://pocketcasts.com)** instead.
 
+- Version 1.1.4
+  - Since changes to HTML and tests failed, now fixed for PythonBytes, TalkPython and RealPython
+
 ## Project highlighted ⭐️
 
 If you wish to listen or see discussion around this project you may in interessted visiting [PythonBytes #338: Scripting iOS with Python](https://pythonbytes.fm/episodes/show/338/scripting-ios-with-python) *(at 18:20)* and [Real Python - episode 160](https://realpython.com/podcasts/rpp/160/) *(at 43:20)*

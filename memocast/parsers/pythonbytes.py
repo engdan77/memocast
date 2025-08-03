@@ -32,7 +32,7 @@ class PythonBytesParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        episode_number, title = bs.find('div', class_='section').find('h1').text.strip('#\n ').split(':')
+        episode_number, title = [_.strip() for _ in bs.find('h1', {'id': 'dialog_title'}).text.strip('#\n ').split(':')]
         self.title = f'#{episode_number} {title}'
         return int(episode_number)
 
@@ -50,4 +50,6 @@ class PythonBytesParser(BasePodcastParser):
                 logger.debug('Skipping to next ')
             else:
                 urls.append(protocols.Url(url, description, self))
+        # Removing unnecessary links
+        urls = [u for u in urls if not any(u.url.startswith(_) for _ in ('#play-at', '#transcript-section'))]
         return urls

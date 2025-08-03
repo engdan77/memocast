@@ -33,21 +33,23 @@ class TalkPythonToMeParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        episode_number = bs.find('a', class_='download-button').attrs['href'].split('/').pop(-2)
-        title = bs.find('div', class_='section').find('h1').text.strip('#\n ')
+        episode_number = next((m.group(1) for s in bs.find_all('span') if (m := re.match(r'^E(\d+)', s.text))), None)
+        assert episode_number is not None, "Unable to find episode number"
+        title = bs.find('h1', {'id': 'dialog_title'}).text
         self.title = f'#{episode_number} {title}'
         return int(episode_number)
 
     def get_all_urls_from_podcast_html(self, episode_source_html: str):
-        bs = BeautifulSoup(episode_source_html, 'html.parser')
         urls = []
-        for bold_item in bs.find_all('b'):
-            logger.debug(f'Found URL item {bold_item}')
-            description = bold_item.text
-            try:
-                url = bold_item.nextSibling.nextSibling.get('href')
-            except AttributeError:
-                logger.debug('Skipping to next ')
-            else:
-                urls.append(protocols.Url(url, description, self))
+        raw_urls = {}
+        bs = BeautifulSoup(episode_source_html, 'html.parser')
+        all_links = [a for a in (li.find_all('a') for li in bs.find_all('li')) if
+                     not next(iter(a), {'href': '/'}).get('href').startswith('/')]
+        for sub_links in all_links:
+            for sub_link in sub_links:
+                title = sub_link.text
+                url = sub_link.get('href')
+                raw_urls[title] = url
+        for description, url in raw_urls.items():
+            urls.append(protocols.Url(url, description, self))
         return urls

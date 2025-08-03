@@ -33,8 +33,8 @@ class RealPythonParser(BasePodcastParser):
         if self.episode_number:
             return self.episode_number
         bs = BeautifulSoup(self.podcast_html, 'html.parser')
-        episode_number = re.match('.+_E(\d+)_.*', bs.find('a', class_='download-button').attrs['href']).group(1)
-        title = bs.find('div', class_='section').find('h1').text.strip('#\n ')
+        episode_number = next((m.group(1) for s in bs.find_all('span') if (m := re.match(r'^E(\d+)', s.text))), None)
+        title = bs.find('h1', {'id': 'dialog_title'}).text
         self.title = f'#{episode_number} {title}'
         return int(episode_number)
 

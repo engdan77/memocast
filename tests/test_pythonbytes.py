@@ -34,6 +34,6 @@ def test_get_linked_url_podcast_source(linked_url):
 
 def test_parse(parser):
     links = parser.parse()
-    assert len(links) == 24, 'Wrong number of URL retrieved'
+    assert len(links) == 26, 'Wrong number of URL retrieved'
     assert all(link.url.startswith(('http', 'mailto')) for link in links), "One of the URL not being valid"
 
