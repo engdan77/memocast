@@ -20,7 +20,7 @@ class BasePodcastParser:
             try:
                 subparser_urls = subparserclass(self.podcast_html).parse()
             except AttributeError as e:
-                logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Google Pod: {e.args}')
+                logger.warning(f'{subparserclass.__name__} unable to parse, needs to be Pocket Casts: {e.args}')
                 continue
             except (ValueError, TypeError) as e:
                 logger.warning(f'Unable to parse using {class_shortname}: {e.args}, SKIP TO NEXT PARSER')

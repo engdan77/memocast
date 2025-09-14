@@ -1,4 +1,4 @@
 __pkg__ = 'parse_podcast'
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 __email__ = 'daniel@engvalls.eu'
 PODCAST_PREFIX = 'https://pca.st'
